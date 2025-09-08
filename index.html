@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Jasa Pasang WiFi - Mulai dari Rp 100.000/Bulan</title>
+    <title>📶Pusat WiFi Solo</title>
     <style>
         * {
             margin: 0;
@@ -268,6 +268,39 @@
         });
 
         // Card animation on scroll
+        const cards = document.querySelectorAll('.card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) rotate(0)';
+                    entry.target.style.transitionDelay = `${index * 0.2}s`;
+                }
+            });
+        }, { threshold: 0.3 });
+
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(70px) rotate(-5deg)';
+            card.style.transition = 'opacity 0.6s, transform 0.6s';
+            observer.observe(card);
+        });
+
+        // Dynamic year in footer
+        document.querySelector('footer p').textContent = `${new Date().getFullYear()} Pusat WiFi Solo. Semua hak dilindungi.`;
+
+        // Add rotateIn animation to cards on click
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.animation = 'rotateIn 0.5s ease-out';
+                setTimeout(() => {
+                    card.style.animation = '';
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>animation on scroll
         const cards = document.querySelectorAll('.card');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
