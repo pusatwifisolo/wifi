@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>📶Jasa Pasang WiFi</title>
+    <title>Pusat WiFi Solo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -17,14 +18,16 @@
             overflow-x: hidden;
             width: 100%;
             min-height: 100vh;
+            position: relative; /* Added for floating button positioning */
         }
         header {
-            background: #1e3a8a;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
             color: white;
             text-align: center;
-            padding: 3em 1em;
+            padding: 2em 1em;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
         header::before {
             content: '';
@@ -35,52 +38,98 @@
             height: 100%;
             background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"%3E%3Cfilter id="bb"%3E%3CfeGaussianBlur in="SourceGraphic" stdDeviation="20" /%3E%3C/filter%3E%3Cpath fill="%23ffffff22" d="M400 0C179.1 0 0 179.1 0 400s179.1 400 400 400 400-179.1 400-400S620.9 0 400 0zm0 720c-176.7 0-320-143.3-320-320s143.3-320 320-320 320 143.3 320 320-143.3 320-320 320z"/%3E%3Ccircle fill="%23ffffff44" cx="400" cy="400" r="300" filter="url(%23bb)"/%3E%3C/svg%3E');
             background-size: cover;
-            opacity: 0.3;
+            opacity: 0.4;
+            animation: subtlePulse 5s infinite ease-in-out;
         }
         header h1 {
-            font-size: 2.5em;
-            margin-bottom: 0.3em;
-            animation: slideInLeft 1s ease-out;
+            font-size: 2.8em;
+            margin-bottom: 0.4em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        header .part1, header .part2, header p, header .slogan {
+            opacity: 0;
+        }
+        header .part1.animated {
+            animation: slideInLeft 1s ease-out forwards;
+        }
+        header .part2.animated {
+            animation: slideInLeft 1s ease-out 0.5s forwards;
+        }
+        header p.animated {
+            animation: slideInRight 1s ease-out 0.4s forwards;
+        }
+        header .slogan.animated {
+            animation: slideInRight 1s ease-out 0.6s forwards;
         }
         header p {
-            font-size: 1.3em;
-            margin-bottom: 0.5em;
-            animation: slideInRight 1s ease-out 0.4s;
-            opacity: 0;
-            animation-fill-mode: forwards;
+            font-size: 1.4em;
+            margin-bottom: 0.6em;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
         header .slogan {
-            font-size: 1.1em;
+            font-size: 1.2em;
             font-style: italic;
-            animation: slideInRight 1s ease-out 0.6s;
-            opacity: 0;
-            animation-fill-mode: forwards;
         }
         .container {
-            max-width: 100%;
+            max-width: 1200px;
             width: 100%;
             margin: 0 auto;
-            padding: 2em 1em;
+            padding: 3em 1em;
             overflow: hidden;
         }
-        .pricing {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5em;
-            padding: 1.5em 0;
+        .features {
+            display: flex;
+            justify-content: space-around;
+            margin: 2em 0;
+            gap: 1em;
         }
-        .card {
+        .feature-card {
             background: white;
             border-radius: 15px;
             box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+            padding: 1.5em;
+            text-align: center;
+            width: 100%;
+            max-width: 280px;
+            transition: transform 0.4s, box-shadow 0.4s;
+            border: 3px solid #3b82f6;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+        .feature-card i {
+            font-size: 2.5em;
+            color: #3b82f6;
+            margin-bottom: 0.5em;
+        }
+        .feature-card h3 {
+            color: #1e3a8a;
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .feature-card p {
+            font-size: 0.9em;
+        }
+        .pricing {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(250px, 1fr));
+            gap: 1.5em;
+            padding: 2em 0;
+        }
+        .card {
+            background: #f8fafc;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
             padding: 2em;
             text-align: center;
             transition: transform 0.4s, box-shadow 0.4s, background 0.4s;
             position: relative;
             overflow: hidden;
             width: 100%;
-            max-width: 400px;
+            max-width: 350px;
             margin: 0 auto;
+            border: 3px solid #60a5fa;
         }
         .card::before {
             content: '';
@@ -89,16 +138,16 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(59,130,246,0.2), transparent);
+            background: radial-gradient(circle, rgba(59,130,246,0.3), transparent);
             transition: transform 0.5s;
         }
         .card:hover::before {
             transform: scale(1.5);
         }
         .card:hover {
-            transform: translateY(-10px) rotate(2deg);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+            transform: translateY(-15px) rotate(1deg);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.35);
+            background: linear-gradient(135deg, #ffffff, #e5e7eb);
         }
         .card h3 {
             color: #1e3a8a;
@@ -106,10 +155,12 @@
             margin-bottom: 0.8em;
             position: relative;
             z-index: 1;
+            line-height: 1.2;
+            white-space: pre-line;
         }
         .card p {
             margin: 0.6em 0;
-            font-size: 1.1em;
+            font-size: 1em;
             position: relative;
             z-index: 1;
         }
@@ -125,36 +176,160 @@
             transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
             position: relative;
             z-index: 1;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         .btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transform: scale(1.15);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
             background: linear-gradient(45deg, #3b82f6, #1e3a8a);
         }
         #contact {
             background: white;
-            border-radius: 15px;
-            padding: 2em;
-            margin: 2em 1em;
+            border-radius: 20px;
+            padding: 1.5em;
+            margin: 2.5em 1em;
             text-align: center;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
             animation: fadeInUp 1s ease-out;
+            border: 3px solid #3b82f6;
         }
-        #contact h2 {
+        .contact-info {
+            display: grid;
+            grid-template-columns: 1fr auto 3fr;
+            gap: 0.3em;
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1em;
+            line-height: 1.4;
+            padding-left: 2.5em;
+        }
+        .contact-info p {
+            margin: 0.3em 0;
+        }
+        .contact-info .label {
+            font-weight: 600;
             color: #1e3a8a;
-            margin-bottom: 1em;
+        }
+        .contact-info .colon {
+            text-align: center;
+            color: #1e3a8a;
+        }
+        .contact-info a {
+            color: #3b82f6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .contact-info a:hover {
+            color: #1e3a8a;
+        }
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+        .popup.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .popup-content {
+            background: linear-gradient(135deg, #ffffff, #dbeafe);
+            border-radius: 25px;
+            padding: 2.5em;
+            text-align: center;
+            max-width: 90%;
+            width: 450px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+            position: relative;
+            animation: popIn 0.6s ease-out;
+            border: 3px solid #3b82f6;
+        }
+        .popup-content h2 {
+            color: #1e3a8a;
             font-size: 1.8em;
+            margin-bottom: 1.2em;
+            line-height: 1.4;
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.8em;
+            cursor: pointer;
+            color: #1e3a8a;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .close-btn:hover {
+            color: #3b82f6;
+            transform: rotate(90deg) scale(1.2);
+        }
+        .popup-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #1e3a8a, #3b82f6);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            margin-top: 1em;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .popup-btn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #3b82f6, #1e3a8a);
+        }
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .whatsapp-float img {
+            width: 40px;
+            height: 40px;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
         }
         footer {
             background: linear-gradient(45deg, #1e3a8a, #3b82f6);
             color: white;
             text-align: center;
-            padding: 1.5em;
+            padding: 0.3em;
             position: relative;
             width: 100%;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
         }
         footer p {
             animation: fadeIn 2s ease-in;
+            font-size: 0.8em;
+            white-space: pre-line;
+            line-height: 1.3;
         }
         @keyframes slideInLeft {
             from { opacity: 0; transform: translateX(-100px); }
@@ -172,88 +347,254 @@
             from { opacity: 0; transform: rotate(-10deg) scale(0.8); }
             to { opacity: 1; transform: rotate(0) scale(1); }
         }
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.7) rotate(-5deg); }
+            to { opacity: 1; transform: scale(1) rotate(0); }
+        }
+        @keyframes subtlePulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 0.6; }
+            100% { opacity: 0.4; }
+        }
         @media (max-width: 768px) {
-            header h1 { font-size: 1.8em; }
-            header p { font-size: 1.1em; }
-            header .slogan { font-size: 0.9em; }
-            .container { padding: 1.5em 0.5em; }
-            .pricing { grid-template-columns: 1fr; gap: 1em; }
+            header { padding: 1.5em 1em; }
+            header h1 { font-size: 2em; }
+            header p { font-size: 1.2em; }
+            header .slogan { font-size: 1em; }
+            .container { padding: 2em 0.5em; }
+            .features { 
+                flex-direction: row; 
+                justify-content: space-around;
+                flex-wrap: nowrap;
+                gap: 0.5em;
+            }
+            .feature-card {
+                max-width: 220px;
+                padding: 1em;
+            }
+            .feature-card i { font-size: 2em; }
+            .feature-card h3 { font-size: 1.1em; }
+            .feature-card p { font-size: 0.8em; }
+            .pricing { 
+                grid-template-columns: repeat(2, minmax(160px, 1fr)); 
+                gap: 1em; 
+            }
             .card { 
                 padding: 1.5em; 
-                max-width: 95%; 
-                margin: 0 auto;
+                max-width: 100%; 
+                font-size: 0.9em; 
             }
+            .card h3 { font-size: 1.5em; }
+            .card p { font-size: 0.9em; }
             .btn { padding: 10px 20px; font-size: 0.9em; }
             #contact { 
-                margin: 1.5em 0.5em; 
-                padding: 1.5em; 
+                margin: 2em 0.5em; 
+                padding: 1.2em;
             }
-            #contact h2 { font-size: 1.5em; }
+            .contact-info { 
+                font-size: 1em; 
+                grid-template-columns: 1fr auto 2fr; 
+                line-height: 1.3;
+                padding-left: 2em;
+            }
+            .popup-content { width: 90%; padding: 2em; }
+            .popup-content h2 { font-size: 1.5em; }
+            .popup-btn { padding: 10px 25px; font-size: 0.9em; }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+            }
+            .whatsapp-float img {
+                width: 35px;
+                height: 35px;
+            }
+            footer { padding: 0.25em; }
+            footer p { font-size: 0.7em; }
         }
         @media (max-width: 480px) {
-            header { padding: 2em 0.5em; }
-            header h1 { font-size: 1.5em; }
+            header { padding: 1em 0.5em; }
+            header h1 { font-size: 1.6em; }
             header p { font-size: 1em; }
-            header .slogan { font-size: 0.85em; }
-            .card h3 { font-size: 1.5em; }
-            .card p { font-size: 1em; }
-            .btn { padding: 8px 15px; font-size: 0.85em; }
-            #contact { padding: 1em; }
-            #contact h2 { font-size: 1.3em; }
+            header .slogan { font-size: 0.9em; }
+            .features {
+                gap: 0.3em;
+            }
+            .feature-card {
+                max-width: 150px;
+                padding: 0.8em;
+            }
+            .feature-card i { font-size: 1.8em; }
+            .feature-card h3 { font-size: 0.9em; }
+            .feature-card p { font-size: 0.7em; }
+            .pricing { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
+            .card { padding: 1em; }
+            .card h3 { font-size: 1.3em; }
+            .card p { font-size: 0.8em; }
+            .btn { padding: 8px 15px; font-size: 0.8em; }
+            #contact { 
+                padding: 1em;
+            }
+            .contact-info { 
+                font-size: 0.9em; 
+                grid-template-columns: 1fr auto 2fr; 
+                line-height: 1.2;
+                padding-left: 1.5em;
+            }
+            .popup-content { padding: 1.5em; }
+            .popup-content h2 { font-size: 1.3em; }
+            .popup-btn { padding: 8px 20px; font-size: 0.8em; }
+            .whatsapp-float {
+                width: 45px;
+                height: 45px;
+            }
+            .whatsapp-float img {
+                width: 30px;
+                height: 30px;
+            }
+            footer { padding: 0.2em; }
+            footer p { font-size: 0.65em; }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Jasa Pasang WiFi</h1>
-        <p>Internet Cepat dan Stabil<br>Mulai dari Rp 100.000/Bulan</p>
+        <h1>
+            <span class="part1">Pasang WiFi ?</span>
+            <br>
+            <span class="part2">Ya di Pusat WiFi Solo</span>
+        </h1> 
+        <p>Mulai dari Rp 100.000/Bulan</p>
         <p class="slogan">Internet Cepat, Murah, dan Gratis Biaya Perbaikan</p>
     </header>
+    <div class="popup" id="welcomePopup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2>Pasang sekarang<br>Promo Gratis 1 Bulan</h2>
+            <a href="#" class="popup-btn" onclick="redirectToWhatsApp('Promo')">Daftar Sekarang</a>
+        </div>
+    </div>
     <div class="container">
+        <section class="features">
+            <div class="feature-card">
+                <i class="fas fa-rocket"></i>
+                <h3>Kecepatan Tinggi</h3>
+                <p>Nikmati internet super cepat untuk semua kebutuhan Anda.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-dollar-sign"></i>
+                <h3>Harga Terjangkau</h3>
+                <p>Paket murah tanpa mengorbankan kualitas layanan.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-tools"></i>
+                <h3>Perbaikan Gratis</h3>
+                <p>Layanan perbaikan tanpa biaya tambahan.</p>
+            </div>
+        </section>
         <section class="pricing" id="pricing">
             <div class="card" data-package="Basic">
-                <h3>Paket Basic</h3>
+                <h3>Paket<br>Basic</h3>
                 <p>Kecepatan: 10 Mbps</p>
                 <p>Harga: Rp 100.000/Bulan</p>
-                <p>Ideal untuk browsing dan streaming ringan</p>
+                <p>Ideal untuk browsing<br>dan streaming ringan</p>
                 <a href="#" class="btn" onclick="redirectToWhatsApp('Basic')">Pilih Paket</a>
             </div>
             <div class="card" data-package="Standard">
-                <h3>Paket Standard</h3>
+                <h3>Paket<br>Standard</h3>
                 <p>Kecepatan: 15 Mbps</p>
                 <p>Harga: Rp 130.000/Bulan</p>
-                <p>Cocok untuk keluarga dan gaming</p>
+                <p>Cocok untuk keluarga<br>dan gaming</p>
                 <a href="#" class="btn" onclick="redirectToWhatsApp('Standard')">Pilih Paket</a>
             </div>
             <div class="card" data-package="Premium">
-                <h3>Paket Premium</h3>
+                <h3>Paket<br>Premium</h3>
                 <p>Kecepatan: 25 Mbps</p>
                 <p>Harga: Rp 150.000/Bulan</p>
-                <p>Untuk streaming HD dan gaming</p>
+                <p>Untuk streaming HD<br>dan belajar online</p>
                 <a href="#" class="btn" onclick="redirectToWhatsApp('Premium')">Pilih Paket</a>
             </div>
             <div class="card" data-package="Platinum">
-                <h3>Paket Platinum</h3>
+                <h3>Paket<br>Platinum</h3>
                 <p>Kecepatan: 50 Mbps</p>
-                <p>Harga: Rp 200.000/Bulan</p>
-                <p>Untuk kebutuhan intensif & tanpa hambatan</p>
+                <p>Harga: Rp 250.000/Bulan</p>
+                <p>Untuk kerja intensif<br>ngebut tanpa hambatan</p>
                 <a href="#" class="btn" onclick="redirectToWhatsApp('Platinum')">Pilih Paket</a>
             </div>
         </section>
         <section id="contact">
             <h2>Hubungi Kami</h2>
-            <p>Untuk pemasangan atau informasi lebih lanjut, hubungi kami di:</p>
-            <p>Telepon: <a href="https://wa.me/6285777773541?text=Saya%20ingin%20informasi%20lebih%20lanjut%20tentang%20jasa%20pasang%20WiFi" target="_blank">0857-7777-3541</a></p>
-            <p>Email: <a href="https://mail.google.com/mail/?view=cm&fs=1&to=halopusatwifisolo@gmail.com" target="_blank">halopusatwifisolo@gmail.com</a></p>
+            <p>Untuk pemasangan atau informasi<br>lebih lanjut, hubungi kami di:</p>
+            <div class="contact-info">
+                <p class="label">WhatsApp</p>
+                <p class="colon">:</p>
+                <p><a href="#" onclick="redirectToContactWhatsApp()">0857-7777-3541</a></p>
+                <p class="label">Email</p>
+                <p class="colon">:</p>
+                <p><a href="mailto:halopusatwifisolo@gmail.com?subject=Informasi%20Pasang%20WiFi%20Solo">halopusatwifisolo@gmail.com</a></p>
+            </div>
         </section>
     </div>
+    <div class="whatsapp-float" onclick="redirectToContactWhatsApp()">
+        <img src="whatsapp.png" alt="WhatsApp">
+    </div>
     <footer>
-        <p>2025 Pusat WiFi Solo. Semua hak dilindungi.</p>
+        <p>2025 Pusat WiFi Solo\nInternet Lancar dan Stabil</p>
     </footer>
     <script>
+        // Function to trigger header animations
+        function triggerHeaderAnimations() {
+            document.querySelector('.part1').classList.add('animated');
+            document.querySelector('.part2').classList.add('animated');
+            document.querySelector('header p').classList.add('animated');
+            document.querySelector('.slogan').classList.add('animated');
+        }
+
+        // Show popup and trigger header animations on page load
+        window.onload = function() {
+            document.getElementById('welcomePopup').classList.add('show');
+            triggerHeaderAnimations();
+        };
+
+        // Close popup and replay header animations
+        function closePopup() {
+            document.getElementById('welcomePopup').classList.remove('show');
+            // Reset header animations
+            document.querySelector('.part1').classList.remove('animated');
+            document.querySelector('.part2').classList.remove('animated');
+            document.querySelector('header p').classList.remove('animated');
+            document.querySelector('.slogan').classList.remove('animated');
+            // Replay animations after a short delay
+            setTimeout(triggerHeaderAnimations, 100);
+        }
+
         // Redirect to WhatsApp with selected package
         function redirectToWhatsApp(packageName) {
-            const message = encodeURIComponent(`Saya ingin mendaftar untuk Paket ${packageName}`);
+            const packages = {
+                Basic: { speed: "10 Mbps", price: "Rp 100.000/Bulan" },
+                Standard: { speed: "15 Mbps", price: "Rp 130.000/Bulan" },
+                Premium: { speed: "25 Mbps", price: "Rp 150.000/Bulan" },
+                Platinum: { speed: "50 Mbps", price: "Rp 250.000/Bulan" },
+                Promo: { speed: "N/A", price: "Promo Gratis 1 Bulan" }
+            };
+
+            const today = new Date();
+            const dateStr = today.getFullYear().toString().slice(-2) +
+                           ("0" + (today.getMonth() + 1)).slice(-2) +
+                           ("0" + today.getDate()).slice(-2);
+            const promoNumber = (parseInt(dateStr) + 22222222).toString().padStart(8, '0');
+            const promoCode = `#REFF${promoNumber}`;
+
+            const message = packageName === 'Promo' 
+                ? encodeURIComponent(`Saya ingin mendaftar untuk Promo Gratis 1 Bulan\n\n${promoCode}`)
+                : encodeURIComponent(`Saya ingin mendaftar untuk Paket ${packageName}\nKecepatan: ${packages[packageName].speed}\nHarga: ${packages[packageName].price}\n\n${promoCode}`);
+
+            const whatsappUrl = `https://wa.me/6285777773541?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Redirect to WhatsApp for contact section and floating button
+        function redirectToContactWhatsApp() {
+            const message = encodeURIComponent(`Saya ingin informasi lebih lanjut tentang Pasang WiFi di Pusat WiFi Solo`);
             const whatsappUrl = `https://wa.me/6285777773541?text=${message}`;
             window.open(whatsappUrl, '_blank');
         }
@@ -268,34 +609,34 @@
         });
 
         // Card animation on scroll
-        const cards = document.querySelectorAll('.card');
+        const cards = document.querySelectorAll('.card, .feature-card');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0) rotate(0)';
-                    entry.target.style.transitionDelay = `${index * 0.2}s`;
+                    entry.target.style.transitionDelay = `${index * 0.15}s`;
                 }
             });
         }, { threshold: 0.3 });
 
         cards.forEach(card => {
             card.style.opacity = '0';
-            card.style.transform = 'translateY(70px) rotate(-5deg)';
-            card.style.transition = 'opacity 0.6s, transform 0.6s';
+            card.style.transform = 'translateY(80px) rotate(-3deg)';
+            card.style.transition = 'opacity 0.7s, transform 0.7s';
             observer.observe(card);
         });
 
         // Dynamic year in footer
-        document.querySelector('footer p').textContent = `${new Date().getFullYear()} Pusat WiFi Solo. Semua hak dilindungi`;
+        document.querySelector('footer p').textContent = `2025 Pusat WiFi Solo\nInternet Lancar dan Stabil`;
 
         // Add rotateIn animation to cards on click
         cards.forEach(card => {
             card.addEventListener('click', () => {
-                card.style.animation = 'rotateIn 0.5s ease-out';
+                card.style.animation = 'rotateIn 0.6s ease-out';
                 setTimeout(() => {
                     card.style.animation = '';
-                }, 500);
+                }, 600);
             });
         });
     </script>
