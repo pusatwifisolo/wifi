@@ -249,6 +249,12 @@
         .contact-info a:hover {
             color: #1e3a8a;
         }
+        .contact-buttons {
+            display: flex;
+            justify-content: space-between;
+            max-width: 600px;
+            margin: 1.5em auto 0;
+        }
         .popup {
             position: fixed;
             top: 0;
@@ -348,7 +354,7 @@
             transform: scale(1.15);
             box-shadow: 0 8px 25px rgba(0,0,0,0.4);
         }
-        .payment-btn {
+        .payment-btn, .gallery-btn {
             display: inline-block;
             padding: 12px 30px;
             background: linear-gradient(45deg, #1e3a8a, #3b82f6);
@@ -358,9 +364,8 @@
             font-weight: bold;
             transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            margin-top: 1.5em;
         }
-        .payment-btn:hover {
+        .payment-btn:hover, .gallery-btn:hover {
             transform: scale(1.15);
             box-shadow: 0 6px 20px rgba(0,0,0,0.3);
             background: linear-gradient(45deg, #3b82f6, #1e3a8a);
@@ -500,7 +505,7 @@
                 width: 34px;
                 height: 34px;
             }
-            .payment-btn {
+            .payment-btn, .gallery-btn {
                 padding: 10px 25px;
                 font-size: 0.9em;
             }
@@ -578,7 +583,7 @@
                 width: 30px;
                 height: 30px;
             }
-            .payment-btn {
+            .payment-btn, .gallery-btn {
                 padding: 8px 20px;
                 font-size: 0.8em;
             }
@@ -667,7 +672,10 @@
                 <p class="colon">:</p>
                 <p><a href="mailto:halopusatwifisolo@gmail.com?subject=Informasi%20Pasang%20WiFi%20Solo">halopusatwifisolo@gmail.com</a></p>
             </div>
-            <a href="https://ridwanbudilaksono.github.io/pembayaran/" class="payment-btn">Pembayaran</a>
+            <div class="contact-buttons">
+                <a href="https://ridwanbudilaksono.github.io/galeri/" class="gallery-btn">Galeri</a>
+                <a href="https://ridwanbudilaksono.github.io/pembayaran/" class="payment-btn">Pembayaran</a>
+            </div>
         </section>
     </div>
     <div class="whatsapp-float" onclick="redirectToContactWhatsApp()">
