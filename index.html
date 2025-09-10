@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Pusat WiFi Solo</title>
+    <link rel="icon" type="image/png" href="https://github.com/ridwanbudilaksono/wifi/blob/main/favicon.png?raw=true">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -136,14 +137,14 @@
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             position: absolute;
-            top: 5px;
-            right: 5px;
+            top: 10px;
+            right: 10px;
             color: #f59e0b;
-            font-size: 2.55em;
+            font-size: 2em;
             padding: 6px;
-            transform: rotate(30deg);
+            transform: rotate(20deg);
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-            animation: crownGlow 1.5s infinite ease-in-out;
+            animation: crownGlow 1.5s infinite ease-in-out, crownBounce 1.5s infinite ease-in-out;
         }
         .card::before {
             content: '';
@@ -330,16 +331,21 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, opacity 0.6s;
             cursor: pointer;
+            opacity: 0;
         }
         .whatsapp-float img {
             width: 40px;
             height: 40px;
             object-fit: contain;
+            transition: opacity 0.6s;
         }
         .whatsapp-float.show {
-            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 1;
+        }
+        .whatsapp-float.show img {
+            opacity: 1;
         }
         .whatsapp-float:hover {
             transform: scale(1.15);
@@ -404,8 +410,13 @@
         }
         @keyframes crownGlow {
             0% { filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); opacity: 1; }
-            50% { filter: drop-shadow(0 4px 8px rgba(245,158,11,0.7)); opacity: 0.6; }
+            50% { filter: drop-shadow(0 4px 8px rgba(245,158,11,0.7)); opacity: 0.7; }
             100% { filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); opacity: 1; }
+        }
+        @keyframes crownBounce {
+            0% { transform: translateY(0) rotate(20deg); }
+            50% { transform: translateY(-5px) rotate(20deg); }
+            100% { transform: translateY(0) rotate(20deg); }
         }
         @media (max-width: 768px) {
             header { padding: 0.8925em 1em; }
@@ -442,6 +453,11 @@
             .card h3 { font-size: 1.5em; }
             .card p { font-size: 0.9em; }
             .btn { padding: 10px 20px; font-size: 0.9em; }
+            .card.best::after {
+                top: 8px;
+                right: 8px;
+                font-size: 1.8em;
+            }
             #contact { 
                 margin: 2em 0.5em; 
                 padding: 1.2em;
@@ -519,7 +535,7 @@
             .card.best::after {
                 top: 5px;
                 right: 5px;
-                font-size: 2.1em;
+                font-size: 1.5em;
             }
             #contact { 
                 padding: 1em;
