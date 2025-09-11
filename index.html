@@ -264,7 +264,7 @@
             width: 100%;
         }
         .links-container a {
-            width: 175px;
+            width: 180px;
             display: inline-block;
             padding: 12px 0;
             background: linear-gradient(45deg, #1e3a8a, #3b82f6);
@@ -516,7 +516,7 @@
                 margin: 0;
             }
             .links-container a {
-                width: 140px;
+                width: 144px;
                 padding: 10px 0;
                 font-size: 0.9em;
             }
@@ -616,7 +616,7 @@
                 margin: 0;
             }
             .links-container a {
-                width: 116px;
+                width: 119px;
                 padding: 8px 0;
                 font-size: 0.8em;
             }
@@ -778,15 +778,21 @@
         <p>2025 Pusat WiFi Solo\nInternet Lancar dan Stabil</p>
     </footer>
     <script>
+        // Scroll to top only on initial page load or refresh
+        if (window.performance && performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+            window.scrollTo(0, 0);
+        } else if (!window.performance) {
+            window.scrollTo(0, 0);
+        }
+
         // Initialize animations on page load
         window.onload = function() {
-            window.scrollTo(0, 0);
             triggerHeaderAnimations();
             initWhatsAppFloatAnimation();
             addButtonClickAnimation();
         };
 
-        // Function to trigger header and button animations
+        // Function to trigger header animations
         function triggerHeaderAnimations() {
             document.querySelector('.part1').classList.add('animated');
             document.querySelector('.part2').classList.add('animated');
