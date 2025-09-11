@@ -188,15 +188,19 @@
             border-radius: 50px;
             margin-top: 1.2em;
             font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            transition: opacity 0.3s ease-out, transform 0.3s ease-in-out;
             position: relative;
             z-index: 1;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            outline: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
         .btn:hover {
-            transform: scale(1.15);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, #3b82f6, #1e3a8a);
+            animation: pulse 0.8s infinite ease-in-out;
+        }
+        .btn.clicked {
+            animation: jumpOut 0.3s ease-in-out forwards;
         }
         #contact {
             background: white;
@@ -260,22 +264,43 @@
             width: 100%;
         }
         .links-container a {
-            flex: 0 0 auto;
-            text-align: center;
-            width: 198px;
+            width: 194px;
+            display: inline-block;
+            padding: 12px 0;
+            background: linear-gradient(45deg, #1e3a8a, #3b82f6);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: opacity 0.3s ease-out, transform 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             white-space: nowrap;
+            text-align: center;
+            outline: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            animation: bounceIn 0.6s ease-out forwards;
+        }
+        .links-container a:hover {
+            animation: pulse 0.8s infinite ease-in-out;
+        }
+        .links-container a.clicked {
+            animation: fadeOut 0.3s ease-out forwards;
         }
         .links-container .gallery-btn {
             margin-right: auto;
             margin-left: 0;
+            animation-delay: 0.1s;
         }
         .links-container .guide-btn {
             margin-left: auto;
             margin-right: auto;
+            animation-delay: 0.2s;
         }
         .links-container .payment-btn {
             margin-left: auto;
             margin-right: 0;
+            animation-delay: 0.3s;
         }
         .popup {
             position: fixed;
@@ -337,14 +362,18 @@
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            transition: opacity 0.3s ease-out, transform 0.3s ease-in-out;
             margin-top: 1em;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            outline: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
         .popup-btn:hover {
-            transform: scale(1.15);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, #3b82f6, #1e3a8a);
+            animation: pulse 0.8s infinite ease-in-out;
+        }
+        .popup-btn.clicked {
+            animation: jumpOut 0.3s ease-in-out forwards;
         }
         .whatsapp-float {
             position: fixed;
@@ -359,10 +388,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: opacity 0.3s ease-out, transform 0.3s ease-in-out;
             cursor: pointer;
             opacity: 0;
-            transform: translateY(50px);
+            outline: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
         .whatsapp-float img {
             width: 40px;
@@ -370,29 +401,10 @@
             object-fit: contain;
         }
         .whatsapp-float.show {
-            animation: floatIn 1s ease-out 0.8s forwards;
+            animation: bounceIn 0.6s ease-out forwards;
         }
-        .whatsapp-float:hover {
-            transform: scale(1.15);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-        }
-        .payment-btn, .gallery-btn, .guide-btn {
-            display: inline-block;
-            padding: 12px 0;
-            background: linear-gradient(45deg, #1e3a8a, #3b82f6);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            white-space: nowrap;
-            text-align: center;
-        }
-        .payment-btn:hover, .gallery-btn:hover, .guide-btn:hover {
-            transform: scale(1.15);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, #3b82f6, #1e3a8a);
+        .whatsapp-float.clicked {
+            animation: jumpOut 0.3s ease-in-out forwards;
         }
         footer {
             background: linear-gradient(45deg, #1e3a8a, #3b82f6);
@@ -421,17 +433,28 @@
             from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes floatIn {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        @keyframes rotateIn {
-            from { opacity: 0; transform: rotate(-10deg) scale(0.8); }
-            to { opacity: 1; transform: rotate(0) scale(1); }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
         }
-        @keyframes popIn {
-            from { opacity: 0; transform: scale(0.7) rotate(-5deg); }
-            to { opacity: 1; transform: scale(1) rotate(0); }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: translateY(20px) scale(0.9); }
+            60% { opacity: 1; transform: translateY(-10px) scale(1.05); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.07); }
+            100% { transform: scale(1); }
+        }
+        @keyframes jumpOut {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.07); }
+            100% { opacity: 1; transform: scale(1); }
         }
         @keyframes subtlePulse {
             0% { opacity: 0.4; }
@@ -492,12 +515,10 @@
                 max-width: 100%;
                 margin: 0;
             }
-            .links-container {
-                flex-direction: row;
-                gap: 0.5em;
-            }
             .links-container a {
-                width: 158.4px;
+                width: 155px;
+                padding: 10px 0;
+                font-size: 0.9em;
             }
             .links-container .gallery-btn {
                 margin-right: auto;
@@ -556,10 +577,6 @@
                 width: 34px;
                 height: 34px;
             }
-            .payment-btn, .gallery-btn, .guide-btn {
-                padding: 10px 0;
-                font-size: 0.9em;
-            }
             footer { padding: 0.25em; }
             footer p { font-size: 0.7em; }
         }
@@ -598,12 +615,10 @@
                 max-width: 100%;
                 margin: 0;
             }
-            .links-container {
-                flex-direction: row;
-                gap: 0.3em;
-            }
             .links-container a {
-                width: 132px;
+                width: 129px;
+                padding: 8px 0;
+                font-size: 0.8em;
             }
             .links-container .gallery-btn {
                 margin-right: auto;
@@ -661,10 +676,6 @@
             .whatsapp-float img {
                 width: 30px;
                 height: 30px;
-            }
-            .payment-btn, .gallery-btn, .guide-btn {
-                padding: 8px 0;
-                font-size: 0.8em;
             }
             footer { padding: 0.2em; }
             footer p { font-size: 0.65em; }
@@ -760,36 +771,90 @@
             </div>
         </section>
     </div>
-    <div class="whatsapp-float" onclick="redirectToContactWhatsApp()">
-        <img src="https://github.com/pusatwifisolo/wifi/blob/main/whatsapp.png?raw=true" alt="WhatsApp">
+    <div class="whatsapp-float">
+        <img id="whatsapp-icon" src="https://github.com/pusatwifisolo/wifi/blob/main/whatsapp.png?raw=true" alt="WhatsApp" width="40" height="40" loading="lazy">
     </div>
     <footer>
         <p>2025 Pusat WiFi Solo\nInternet Lancar dan Stabil</p>
     </footer>
     <script>
-        // Scroll to top and initialize animations on page load
+        // Initialize animations on page load
         window.onload = function() {
             window.scrollTo(0, 0);
             triggerHeaderAnimations();
+            initWhatsAppFloatAnimation();
+            addButtonClickAnimation();
         };
 
-        // Function to trigger header and WhatsApp float animations
+        // Function to trigger header and button animations
         function triggerHeaderAnimations() {
             document.querySelector('.part1').classList.add('animated');
             document.querySelector('.part2').classList.add('animated');
             document.querySelector('header p').classList.add('animated');
             document.querySelector('.slogan').classList.add('animated');
-            document.querySelector('.whatsapp-float').classList.add('show');
         }
 
-        // Close popup and replay header and WhatsApp float animations
+        // WhatsApp float animation
+        function initWhatsAppFloatAnimation() {
+            const whatsappFloat = document.querySelector('.whatsapp-float');
+            const whatsappIcon = document.getElementById('whatsapp-icon');
+
+            function showWhatsAppFloat() {
+                whatsappFloat.classList.add('show');
+            }
+
+            if (whatsappIcon.complete) {
+                showWhatsAppFloat();
+            } else {
+                whatsappIcon.addEventListener('load', showWhatsAppFloat);
+                whatsappIcon.addEventListener('error', showWhatsAppFloat);
+            }
+
+            setTimeout(showWhatsAppFloat, 5000);
+        }
+
+        // Add click animation to buttons
+        function addButtonClickAnimation() {
+            const linkButtons = document.querySelectorAll('.links-container a');
+            const otherButtons = document.querySelectorAll('.btn, .popup-btn, .close-btn');
+            const whatsappFloat = document.querySelector('.whatsapp-float');
+
+            linkButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    button.classList.add('clicked');
+                    setTimeout(() => {
+                        button.classList.remove('clicked');
+                        window.location.href = button.href;
+                    }, 300);
+                });
+            });
+
+            otherButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    button.classList.add('clicked');
+                    setTimeout(() => {
+                        button.classList.remove('clicked');
+                    }, 300);
+                });
+            });
+
+            whatsappFloat.addEventListener('click', () => {
+                whatsappFloat.classList.add('clicked');
+                redirectToContactWhatsApp();
+                setTimeout(() => {
+                    whatsappFloat.classList.remove('clicked');
+                }, 300);
+            });
+        }
+
+        // Close popup and replay header animations
         function closePopup() {
             document.getElementById('welcomePopup').classList.remove('show');
             document.querySelector('.part1').classList.remove('animated');
             document.querySelector('.part2').classList.remove('animated');
             document.querySelector('header p').classList.remove('animated');
             document.querySelector('.slogan').classList.remove('animated');
-            document.querySelector('.whatsapp-float').classList.remove('show');
             setTimeout(triggerHeaderAnimations, 100);
         }
 
@@ -808,24 +873,19 @@
                 : encodeURIComponent(`Saya ingin mendaftar untuk Paket ${packageName}\nKecepatan: ${packages[packageName].speed}\nHarga: ${packages[packageName].price}`);
 
             const whatsappUrl = `https://wa.me/6285777773541?text=${message}`;
-            window.open(whatsappUrl, '_blank');
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 300);
         }
 
         // Redirect to WhatsApp for contact section and floating button
         function redirectToContactWhatsApp() {
             const message = encodeURIComponent(`Saya ingin informasi lebih lanjut tentang Pasang WiFi di Pusat WiFi Solo`);
             const whatsappUrl = `https://wa.me/6285777773541?text=${message}`;
-            window.open(whatsappUrl, '_blank');
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 300);
         }
-
-        // Smooth scroll to contact section
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const contactSection = document.getElementById('contact');
-                contactSection.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
 
         // Card animation on scroll
         const cards = document.querySelectorAll('.card, .feature-card');
