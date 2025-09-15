@@ -436,7 +436,7 @@
                 <div class="pricing-row">
                     <div class="card bg-white p-4 md:p-6 rounded-xl shadow-md text-center">
                         <h3 class="text-lg md:text-2xl font-bold mb-3 md:mb-3">Paket<br>Platinum</h3>
-                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-4 md:mb-4">Rp 250.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
+                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-4 md:mb-4">Rp 200.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
                         <ul class="space-y-2 md:space-y-3 mb-6 md:mb-6 text-sm md:text-base">
                             <li>Kecepatan 35 Mbps</li>
                             <li>Untuk streaming HD dan belajar online</li>
@@ -446,7 +446,7 @@
                     
                     <div class="card bg-white p-4 md:p-6 rounded-xl shadow-md text-center">
                         <h3 class="text-lg md:text-2xl font-bold mb-3 md:mb-3">Paket<br>Diamond</h3>
-                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-4 md:mb-4">Rp 300.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
+                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-4 md:mb-4">Rp 250.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
                         <ul class="space-y-2 md:space-y-3 mb-6 md:mb-6 text-sm md:text-base">
                             <li>Kecepatan 50 Mbps</li>
                             <li>Untuk kerja intensif ngebut tanpa hambatan skala bisnis dan usaha</li>
@@ -504,7 +504,7 @@
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-12">
         <div class="container mx-auto max-w-1200px px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                     <div class="flex items-center mb-6">
                         <img src="https://github.com/pusatwifisolo/wifi/blob/main/logopwslow.png?raw=true" alt="Logo" class="w-10 h-10 mr-3">
@@ -514,29 +514,19 @@
                 </div>
                 
                 <div>
-                    <h3 class="text-lg font-bold mb-6">Tautan Cepat</h3>
+                    <h3 class="text-lg font-bold mb-6">Menu</h3>
                     <ul class="space-y-3">
-                        <li><a href="#home" class="text-gray-400 hover:text-white no-highlight">Beranda</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-white no-highlight">Tentang</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white no-highlight">Layanan</a></li>
-                        <li><a href="#pricing" class="text-gray-400 hover:text-white no-highlight">Harga</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white no-highlight">Kontak</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-6">Halaman</h3>
-                    <ul class="space-y-3">
-                        <li><a href="https://pusatwifisolo.github.io/galeri/" class="text-gray-400 hover:text-white no-highlight">Galeri</a></li>
+                        <li><a href="https://pusatwifisolo.github.io/wifi/" class="text-gray-400 hover:text-white no-highlight">Halaman Utama</a></li>
                         <li><a href="https://pusatwifisolo.github.io/panduan/" class="text-gray-400 hover:text-white no-highlight">Panduan Layanan</a></li>
                         <li><a href="https://pusatwifisolo.github.io/pembayaran/" class="text-gray-400 hover:text-white no-highlight">Pembayaran</a></li>
+                        <li><a href="https://pusatwifisolo.github.io/galeri/" class="text-gray-400 hover:text-white no-highlight">Galeri</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h3 class="text-lg font-bold mb-6">Tetap Terhubung</h3>
                     <div class="flex space-x-4 mb-6">
-                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 no-highlight" onclick="redirectToContactWhatsApp()">
+                        <a href="javascript:void(0)" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 no-highlight" onclick="redirectToContactWhatsApp('general')">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                         <a href="mailto:halopusatwifisolo@gmail.com?subject=Informasi%20Pasang%20WiFi%20Solo" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 no-highlight">
@@ -598,8 +588,8 @@
             const packages = {
                 Basic: { speed: "10 Mbps", price: "Rp 100.000/Bulan" },
                 Premium: { speed: "20 Mbps", price: "Rp 150.000/Bulan" },
-                Platinum: { speed: "35 Mbps", price: "Rp 250.000/Bulan" },
-                Diamond: { speed: "50 Mbps", price: "Rp 300.000/Bulan" }
+                Platinum: { speed: "35 Mbps", price: "Rp 200.000/Bulan" },
+                Diamond: { speed: "50 Mbps", price: "Rp 250.000/Bulan" }
             };
 
             const message = encodeURIComponent(`Saya ingin mendaftar untuk Paket ${packageName}\nKecepatan: ${packages[packageName].speed}\nHarga: ${packages[packageName].price}`);
