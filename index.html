@@ -38,7 +38,7 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
         
-        .card {
+        .card, .feature-card {
             transition: transform 0.3s ease;
             border-radius: 15px;
             overflow: hidden;
@@ -50,7 +50,7 @@
             justify-content: space-between;
         }
         
-        .card:hover {
+        .card:hover, .feature-card:hover {
             transform: translateY(-10px);
         }
         
@@ -70,69 +70,14 @@
             left: 0;
         }
 
-        .whatsapp-float {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            z-index: 1000;
-            width: 61px;
-            height: 61px;
-            background: linear-gradient(45deg, #25D366, #128C7E);
-            border-radius: 50%;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.3s ease-out, transform 0.3s ease-in-out;
-            cursor: pointer;
-            opacity: 0;
-            outline: none;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-        .whatsapp-float img {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-        }
-        
-        .whatsapp-float.show {
-            animation: bounceIn 0.6s ease-out forwards;
-        }
-        
-        .whatsapp-float.clicked {
-            animation: jumpOut 0.3s ease-in-out forwards;
-        }
-
-        @keyframes bounceIn {
-            0% { opacity: 0; transform: translateY(20px) scale(0.9); }
-            60% { opacity: 1; transform: translateY(-10px) scale(1.05); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        
-        @keyframes jumpOut {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.07); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
         @media (max-width: 767px) {
-            .whatsapp-float {
-                width: 51px;
-                height: 51px;
-                bottom: 10px;
-                left: 10px;
-            }
-            .whatsapp-float img {
-                width: 34px;
-                height: 34px;
-            }
             .about-features {
                 display: flex;
                 flex-direction: column;
                 gap: 0.5rem;
-                overflow-x: hidden;
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 1.5rem;
             }
             .about-row {
                 display: flex;
@@ -144,8 +89,9 @@
                 flex: 1;
                 min-width: 0;
                 max-width: 100%;
-                padding: 1rem;
+                padding: 1rem 1rem 1.5rem 1rem;
                 font-size: 0.9rem;
+                min-height: 220px;
             }
             .about-row .feature-card h3 {
                 font-size: 1.2rem;
@@ -160,7 +106,9 @@
                 display: flex;
                 flex-direction: column;
                 gap: 0.5rem;
-                overflow-x: hidden;
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 1.5rem;
             }
             .pricing-row {
                 display: flex;
@@ -172,39 +120,35 @@
                 flex: 1;
                 min-width: 0;
                 max-width: 100%;
-                padding: 1rem;
+                padding: 1rem 1rem 1.5rem 1rem;
                 font-size: 0.9rem;
+                min-height: 280px;
             }
             .pricing-row .card h3 {
                 font-size: 1.2rem;
+                margin-bottom: 0.75rem;
             }
             .pricing-row .card .price {
                 font-size: 1.8rem;
+                margin-bottom: 1rem;
             }
             .pricing-row .card ul {
                 font-size: 0.8rem;
                 min-height: 80px;
                 flex-grow: 1;
+                space-y: 0.5rem;
             }
             .pricing-row .card a {
                 padding: 8px 15px;
                 font-size: 0.8rem;
+                margin-top: 1.5rem;
             }
         }
         
         @media (max-width: 480px) {
-            .whatsapp-float {
-                width: 46px;
-                height: 46px;
-                bottom: 10px;
-                left: 10px;
-            }
-            .whatsapp-float img {
-                width: 30px;
-                height: 30px;
-            }
             .about-row .feature-card {
-                padding: 0.8rem;
+                padding: 0.8rem 0.8rem 1.2rem 0.8rem;
+                min-height: 200px;
             }
             .about-row .feature-card h3 {
                 font-size: 1rem;
@@ -216,21 +160,26 @@
                 font-size: 1.3rem;
             }
             .pricing-row .card {
-                padding: 0.8rem;
+                padding: 0.8rem 0.8rem 1.2rem 0.8rem;
+                min-height: 260px;
             }
             .pricing-row .card h3 {
                 font-size: 1rem;
+                margin-bottom: 0.5rem;
             }
             .pricing-row .card .price {
                 font-size: 1.6rem;
+                margin-bottom: 0.75rem;
             }
             .pricing-row .card ul {
                 font-size: 0.7rem;
                 min-height: 70px;
+                space-y: 0.4rem;
             }
             .pricing-row .card a {
                 padding: 6px 12px;
                 font-size: 0.7rem;
+                margin-top: 1rem;
             }
         }
         
@@ -239,7 +188,9 @@
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
                 gap: 1rem;
-                overflow-x: hidden;
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 2rem;
             }
             .about-row {
                 display: contents;
@@ -248,7 +199,9 @@
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
                 gap: 1rem;
-                overflow-x: hidden;
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 2rem;
             }
             .pricing-row {
                 display: contents;
@@ -256,6 +209,19 @@
             .pricing-row .card ul {
                 min-height: 100px;
                 flex-grow: 1;
+                space-y: 0.75rem;
+            }
+            .pricing-row .card h3 {
+                margin-bottom: 0.75rem;
+            }
+            .pricing-row .card .price {
+                margin-bottom: 1rem;
+            }
+            .pricing-row .card a {
+                margin-top: 1.5rem;
+            }
+            .feature-card, .card {
+                min-height: 300px;
             }
         }
     </style>
@@ -369,26 +335,30 @@
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
-                            <span>Jangkauan untuk 10+ perangkat</span>
+                            <span>Jangkauan untuk 20+ perangkat</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                            <span>Internet cepat dan stabil</span>
                         </li>
                     </ul>
                 </div>
                 
                 <div class="bg-blue-50 p-8 rounded-xl">
-                    <h3 class="text-2xl font-bold mb-4 text-blue-800">WiFi Bisnis</h3>
-                    <p class="text-gray-700 mb-6">Internet dedicated untuk mendukung operasional bisnis dengan uptime 99.9%.</p>
+                    <h3 class="text-2xl font-bold mb-4 text-blue-800">WiFi Voucher</h3>
+                    <p class="text-gray-700 mb-6">Layanan internet berbasis voucher untuk akses fleksibel, ideal untuk kafe, hotel, dan event.</p>
                     <ul class="space-y-3">
                         <li class="flex items-start">
                             <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
-                            <span>Kecepatan hingga 100 Mbps</span>
+                            <span>Akses internet fleksibel dengan voucher</span>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
-                            <span>Jaringan khusus bisnis</span>
+                            <span>Kontrol pengguna dan batas waktu</span>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
-                            <span>Support prioritas 24/7</span>
+                            <span>Ideal untuk kafe, hotel, dan event</span>
                         </li>
                     </ul>
                 </div>
@@ -410,9 +380,9 @@
             <div class="pricing-grid">
                 <div class="pricing-row">
                     <div class="card bg-white p-4 md:p-6 rounded-xl shadow-md text-center">
-                        <h3 class="text-lg md:text-2xl font-bold mb-4">Paket<br>Basic</h3>
-                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-6">Rp 100.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
-                        <ul class="space-y-3 md:space-y-4 mb-8 text-sm md:text-base">
+                        <h3 class="text-lg md:text-2xl font-bold mb-3 md:mb-3">Paket<br>Basic</h3>
+                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-4 md:mb-4">Rp 100.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
+                        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-6 text-sm md:text-base">
                             <li>Kecepatan 10 Mbps</li>
                             <li>Ideal untuk browsing dan YouTube</li>
                         </ul>
@@ -421,9 +391,9 @@
                     
                     <div class="card bg-white p-4 md:p-6 rounded-xl shadow-md text-center border-2 border-blue-600 relative">
                         <div class="absolute top-0 right-0 bg-blue-600 text-white px-3 md:px-4 py-1 text-xs md:text-sm font-medium rounded-bl-lg">POPULER</div>
-                        <h3 class="text-lg md:text-2xl font-bold mb-4">Paket<br>Premium</h3>
-                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-6">Rp 150.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
-                        <ul class="space-y-3 md:space-y-4 mb-8 text-sm md:text-base">
+                        <h3 class="text-lg md:text-2xl font-bold mb-3 md:mb-3">Paket<br>Premium</h3>
+                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-4 md:mb-4">Rp 150.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
+                        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-6 text-sm md:text-base">
                             <li>Kecepatan 20 Mbps</li>
                             <li>Cocok untuk keluarga dan usaha warung makan</li>
                         </ul>
@@ -433,9 +403,9 @@
                 
                 <div class="pricing-row">
                     <div class="card bg-white p-4 md:p-6 rounded-xl shadow-md text-center">
-                        <h3 class="text-lg md:text-2xl font-bold mb-4">Paket<br>Platinum</h3>
-                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-6">Rp 250.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
-                        <ul class="space-y-3 md:space-y-4 mb-8 text-sm md:text-base">
+                        <h3 class="text-lg md:text-2xl font-bold mb-3 md:mb-3">Paket<br>Platinum</h3>
+                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-4 md:mb-4">Rp 250.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
+                        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-6 text-sm md:text-base">
                             <li>Kecepatan 35 Mbps</li>
                             <li>Untuk streaming HD dan belajar online</li>
                         </ul>
@@ -443,9 +413,9 @@
                     </div>
                     
                     <div class="card bg-white p-4 md:p-6 rounded-xl shadow-md text-center">
-                        <h3 class="text-lg md:text-2xl font-bold mb-4">Paket<br>Diamond</h3>
-                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-6">Rp 300.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
-                        <ul class="space-y-3 md:space-y-4 mb-8 text-sm md:text-base">
+                        <h3 class="text-lg md:text-2xl font-bold mb-3 md:mb-3">Paket<br>Diamond</h3>
+                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-4 md:mb-4">Rp 300.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
+                        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-6 text-sm md:text-base">
                             <li>Kecepatan 50 Mbps</li>
                             <li>Untuk kerja intensif ngebut tanpa hambatan skala bisnis dan usaha</li>
                         </ul>
@@ -498,11 +468,6 @@
             </div>
         </div>
     </section>
-
-    <!-- WhatsApp Float -->
-    <div class="whatsapp-float">
-        <img id="whatsapp-icon" src="https://github.com/pusatwifisolo/wifi/blob/main/whatsapp.png?raw=true" alt="WhatsApp" width="40" height="40" loading="lazy">
-    </div>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-12">
@@ -596,33 +561,6 @@
             });
         });
 
-        // WhatsApp float animation
-        function initWhatsAppFloatAnimation() {
-            const whatsappFloat = document.querySelector('.whatsapp-float');
-            const whatsappIcon = document.getElementById('whatsapp-icon');
-
-            function showWhatsAppFloat() {
-                whatsappFloat.classList.add('show');
-            }
-
-            if (whatsappIcon.complete) {
-                showWhatsAppFloat();
-            } else {
-                whatsappIcon.addEventListener('load', showWhatsAppFloat);
-                whatsappIcon.addEventListener('error', showWhatsAppFloat);
-            }
-
-            setTimeout(showWhatsAppFloat, 5000);
-
-            whatsappFloat.addEventListener('click', () => {
-                whatsappFloat.classList.add('clicked');
-                redirectToContactWhatsApp();
-                setTimeout(() => {
-                    whatsappFloat.classList.remove('clicked');
-                }, 300);
-            });
-        }
-
         // Redirect to WhatsApp with selected package
         function redirectToWhatsApp(packageName) {
             const packages = {
@@ -640,7 +578,7 @@
             }, 300);
         }
 
-        // Redirect to WhatsApp for contact section and floating button
+        // Redirect to WhatsApp for contact section
         function redirectToContactWhatsApp() {
             const message = encodeURIComponent(`Saya ingin informasi lebih lanjut tentang Pasang WiFi di Pusat WiFi Solo`);
             const whatsappUrl = `https://wa.me/6285777773541?text=${message}`;
@@ -648,11 +586,6 @@
                 window.open(whatsappUrl, '_blank');
             }, 300);
         }
-
-        // Initialize WhatsApp float animation on page load
-        window.onload = function() {
-            initWhatsAppFloatAnimation();
-        };
 
         // Card animation on scroll
         const cards = document.querySelectorAll('.card, .feature-card');
