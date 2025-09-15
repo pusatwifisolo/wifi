@@ -45,6 +45,9 @@
             width: 100%;
             max-width: 350px;
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         
         .card:hover {
@@ -128,57 +131,64 @@
             .about-features {
                 display: flex;
                 flex-direction: column;
-                gap: 0.6em;
+                gap: 0.5rem;
+                overflow-x: hidden;
             }
             .about-row {
                 display: flex;
                 flex-direction: row;
                 width: 100%;
-                gap: 0.6em;
+                gap: 0.5rem;
             }
             .about-row .feature-card {
                 flex: 1;
                 min-width: 0;
-                padding: 1.5em;
                 max-width: 100%;
-                font-size: 0.9em;
+                padding: 1rem;
+                font-size: 0.9rem;
             }
             .about-row .feature-card h3 {
-                font-size: 1.5em;
+                font-size: 1.2rem;
             }
             .about-row .feature-card p {
-                font-size: 0.8em;
+                font-size: 0.8rem;
+            }
+            .about-row .feature-card i {
+                font-size: 1.5rem;
             }
             .pricing-grid {
                 display: flex;
                 flex-direction: column;
-                gap: 0.6em;
+                gap: 0.5rem;
+                overflow-x: hidden;
             }
             .pricing-row {
                 display: flex;
                 flex-direction: row;
                 width: 100%;
-                gap: 0.6em;
+                gap: 0.5rem;
             }
             .pricing-row .card {
                 flex: 1;
                 min-width: 0;
-                padding: 1.5em;
                 max-width: 100%;
-                font-size: 0.9em;
+                padding: 1rem;
+                font-size: 0.9rem;
             }
             .pricing-row .card h3 {
-                font-size: 1.5em;
+                font-size: 1.2rem;
             }
-            .pricing-row .card .text-4xl {
-                font-size: 2em;
+            .pricing-row .card .price {
+                font-size: 1.8rem;
             }
             .pricing-row .card ul {
-                font-size: 0.9em;
+                font-size: 0.8rem;
+                min-height: 80px;
+                flex-grow: 1;
             }
             .pricing-row .card a {
-                padding: 10px 20px;
-                font-size: 0.9em;
+                padding: 8px 15px;
+                font-size: 0.8rem;
             }
         }
         
@@ -194,51 +204,58 @@
                 height: 30px;
             }
             .about-row .feature-card {
-                padding: 1em;
+                padding: 0.8rem;
             }
             .about-row .feature-card h3 {
-                font-size: 1.3em;
+                font-size: 1rem;
             }
             .about-row .feature-card p {
-                font-size: 0.7em;
+                font-size: 0.7rem;
             }
             .about-row .feature-card i {
-                font-size: 1.8em;
+                font-size: 1.3rem;
             }
             .pricing-row .card {
-                padding: 1em;
+                padding: 0.8rem;
             }
             .pricing-row .card h3 {
-                font-size: 1.3em;
+                font-size: 1rem;
             }
-            .pricing-row .card .text-4xl {
-                font-size: 1.8em;
+            .pricing-row .card .price {
+                font-size: 1.6rem;
             }
             .pricing-row .card ul {
-                font-size: 0.8em;
+                font-size: 0.7rem;
+                min-height: 70px;
             }
             .pricing-row .card a {
-                padding: 8px 15px;
-                font-size: 0.8em;
+                padding: 6px 12px;
+                font-size: 0.7rem;
             }
         }
         
         @media (min-width: 768px) {
             .about-features {
                 display: grid;
-                grid-template-columns: repeat(4, minmax(250px, 1fr));
-                gap: 0.8em;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+                overflow-x: hidden;
             }
             .about-row {
                 display: contents;
             }
             .pricing-grid {
                 display: grid;
-                grid-template-columns: repeat(4, minmax(250px, 1fr));
-                gap: 0.8em;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+                overflow-x: hidden;
             }
             .pricing-row {
                 display: contents;
+            }
+            .pricing-row .card ul {
+                min-height: 100px;
+                flex-grow: 1;
             }
         }
     </style>
@@ -246,7 +263,7 @@
 <body>
     <!-- Header & Navigation -->
     <header class="bg-white shadow-md fixed w-full z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="container mx-auto max-w-1200px px-4 py-4 flex justify-between items-center">
             <div class="flex items-center">
                 <img src="https://github.com/pusatwifisolo/wifi/blob/main/logopwslow.png?raw=true" alt="Logo" class="w-12 h-12 mr-3">
                 <span class="text-2xl font-bold text-gray-800">Pusat WiFi <span class="text-blue-600">Solo</span></span>
@@ -279,7 +296,7 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero flex items-center pt-24">
-        <div class="container mx-auto px-4 text-center">
+        <div class="container mx-auto max-w-1200px px-4 text-center">
             <h1 class="text-4xl md:text-6xl font-bold mb-6">Pasang WiFi?<br>Ya di Pusat WiFi Solo</h1>
             <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">Internet Cepat, Murah, dan Gratis Biaya Perbaikan<br>mulai dari Rp 100.000/Bulan</p>
             <div class="flex flex-col md:flex-row justify-center gap-4">
@@ -291,44 +308,44 @@
 
     <!-- About Section -->
     <section id="about" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto max-w-1200px px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 section-title mx-auto">Tentang Layanan Kami</h2>
             <p class="text-gray-600 text-center max-w-3xl mx-auto mb-16">Kami menyediakan solusi internet terbaik dengan teknologi terkini untuk memenuhi kebutuhan digital Anda.</p>
             
             <div class="about-features">
                 <div class="about-row">
-                    <div class="feature-card bg-white p-4 md:p-8 rounded-xl shadow-md text-center card">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-rocket text-blue-600 text-2xl"></i>
+                    <div class="feature-card bg-white p-4 md:p-6 rounded-xl shadow-md text-center card">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                            <i class="fas fa-rocket text-blue-600 text-lg md:text-2xl"></i>
                         </div>
-                        <h3 class="text-xl md:text-xl font-bold mb-4">Kecepatan Maksimal</h3>
-                        <p class="text-gray-600">Nikmati internet super cepat hingga 100 Mbps untuk streaming, gaming, dan bekerja tanpa lag dengan jaringan stabil kami.</p>
+                        <h3 class="text-lg md:text-xl font-bold mb-4">Kecepatan Maksimal</h3>
+                        <p class="text-gray-600 text-sm md:text-base">Nikmati internet super cepat hingga 100 Mbps untuk streaming, gaming, dan bekerja tanpa lag dengan jaringan stabil kami.</p>
                     </div>
                     
-                    <div class="feature-card bg-white p-4 md:p-8 rounded-xl shadow-md text-center card">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-dollar-sign text-blue-600 text-2xl"></i>
+                    <div class="feature-card bg-white p-4 md:p-6 rounded-xl shadow-md text-center card">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                            <i class="fas fa-dollar-sign text-blue-600 text-lg md:text-2xl"></i>
                         </div>
-                        <h3 class="text-xl md:text-xl font-bold mb-4">Harga Terjangkau</h3>
-                        <p class="text-gray-600">Paket hemat mulai Rp 100.000/bulan dengan kualitas premium, cocok untuk semua kalangan tanpa menguras dompet.</p>
+                        <h3 class="text-lg md:text-xl font-bold mb-4">Harga Terjangkau</h3>
+                        <p class="text-gray-600 text-sm md:text-base">Paket hemat mulai Rp 100.000/bulan dengan kualitas premium, cocok untuk semua kalangan tanpa menguras dompet.</p>
                     </div>
                 </div>
                 
                 <div class="about-row">
-                    <div class="feature-card bg-white p-4 md:p-8 rounded-xl shadow-md text-center card">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-tools text-blue-600 text-2xl"></i>
+                    <div class="feature-card bg-white p-4 md:p-6 rounded-xl shadow-md text-center card">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                            <i class="fas fa-tools text-blue-600 text-lg md:text-2xl"></i>
                         </div>
-                        <h3 class="text-xl md:text-xl font-bold mb-4">Perbaikan Gratis</h3>
-                        <p class="text-gray-600">Layanan perbaikan cepat 24/7 tanpa biaya tambahan, memastikan koneksi Anda selalu optimal dan bebas gangguan.</p>
+                        <h3 class="text-lg md:text-xl font-bold mb-4">Perbaikan Gratis</h3>
+                        <p class="text-gray-600 text-sm md:text-base">Layanan perbaikan cepat 24/7 tanpa biaya tambahan, memastikan koneksi Anda selalu optimal dan bebas gangguan.</p>
                     </div>
                     
-                    <div class="feature-card bg-white p-4 md:p-8 rounded-xl shadow-md text-center card">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-headset text-blue-600 text-2xl"></i>
+                    <div class="feature-card bg-white p-4 md:p-6 rounded-xl shadow-md text-center card">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                            <i class="fas fa-headset text-blue-600 text-lg md:text-2xl"></i>
                         </div>
-                        <h3 class="text-xl md:text-xl font-bold mb-4">Dukungan 24/7</h3>
-                        <p class="text-gray-600">Tim teknis kami siap membantu Anda kapan saja, setiap hari. Tidak ada lagi gangguan yang berlarut-larut.</p>
+                        <h3 class="text-lg md:text-xl font-bold mb-4">Dukungan 24/7</h3>
+                        <p class="text-gray-600 text-sm md:text-base">Tim teknis kami siap membantu Anda kapan saja, setiap hari. Tidak ada lagi gangguan yang berlarut-larut.</p>
                     </div>
                 </div>
             </div>
@@ -337,7 +354,7 @@
 
     <!-- Services Section -->
     <section id="services" class="py-20">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto max-w-1200px px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 section-title mx-auto">Layanan Kami</h2>
             <p class="text-gray-600 text-center max-w-3xl mx-auto mb-16">Berbagai pilihan layanan internet untuk memenuhi kebutuhan rumah tangga dan bisnis.</p>
             
@@ -386,27 +403,27 @@
 
     <!-- Pricing Section -->
     <section id="pricing" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto max-w-1200px px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 section-title mx-auto">Paket Harga</h2>
             <p class="text-gray-600 text-center max-w-3xl mx-auto mb-16">Pilih paket yang sesuai dengan kebutuhan dan budget Anda. Semua paket unlimited tanpa batasan kuota.</p>
             
             <div class="pricing-grid">
                 <div class="pricing-row">
-                    <div class="card bg-white p-4 md:p-8 rounded-xl shadow-md text-center">
-                        <h3 class="text-xl md:text-2xl font-bold mb-4 mt-6">Paket Basic</h3>
-                        <div class="text-3xl md:text-4xl font-bold text-blue-600 mb-6">Rp 100.000<span class="text-base md:text-lg font-normal">/bulan</span></div>
-                        <ul class="space-y-3 md:space-y-4 mb-8">
+                    <div class="card bg-white p-4 md:p-6 rounded-xl shadow-md text-center">
+                        <h3 class="text-lg md:text-2xl font-bold mb-4">Paket<br>Basic</h3>
+                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-6">Rp 100.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
+                        <ul class="space-y-3 md:space-y-4 mb-8 text-sm md:text-base">
                             <li>Kecepatan 10 Mbps</li>
                             <li>Ideal untuk browsing dan YouTube</li>
                         </ul>
                         <a href="#" class="btn-primary text-white font-medium inline-block" onclick="redirectToWhatsApp('Basic')">Pilih Paket</a>
                     </div>
                     
-                    <div class="card bg-white p-4 md:p-8 rounded-xl shadow-md text-center border-2 border-blue-600 relative">
+                    <div class="card bg-white p-4 md:p-6 rounded-xl shadow-md text-center border-2 border-blue-600 relative">
                         <div class="absolute top-0 right-0 bg-blue-600 text-white px-3 md:px-4 py-1 text-xs md:text-sm font-medium rounded-bl-lg">POPULER</div>
-                        <h3 class="text-xl md:text-2xl font-bold mb-4 mt-6">Paket Premium</h3>
-                        <div class="text-3xl md:text-4xl font-bold text-blue-600 mb-6">Rp 150.000<span class="text-base md:text-lg font-normal">/bulan</span></div>
-                        <ul class="space-y-3 md:space-y-4 mb-8">
+                        <h3 class="text-lg md:text-2xl font-bold mb-4">Paket<br>Premium</h3>
+                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-6">Rp 150.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
+                        <ul class="space-y-3 md:space-y-4 mb-8 text-sm md:text-base">
                             <li>Kecepatan 20 Mbps</li>
                             <li>Cocok untuk keluarga dan usaha warung makan</li>
                         </ul>
@@ -415,20 +432,20 @@
                 </div>
                 
                 <div class="pricing-row">
-                    <div class="card bg-white p-4 md:p-8 rounded-xl shadow-md text-center">
-                        <h3 class="text-xl md:text-2xl font-bold mb-4 mt-6">Paket Platinum</h3>
-                        <div class="text-3xl md:text-4xl font-bold text-blue-600 mb-6">Rp 250.000<span class="text-base md:text-lg font-normal">/bulan</span></div>
-                        <ul class="space-y-3 md:space-y-4 mb-8">
+                    <div class="card bg-white p-4 md:p-6 rounded-xl shadow-md text-center">
+                        <h3 class="text-lg md:text-2xl font-bold mb-4">Paket<br>Platinum</h3>
+                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-6">Rp 250.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
+                        <ul class="space-y-3 md:space-y-4 mb-8 text-sm md:text-base">
                             <li>Kecepatan 35 Mbps</li>
                             <li>Untuk streaming HD dan belajar online</li>
                         </ul>
                         <a href="#" class="btn-primary text-white font-medium inline-block" onclick="redirectToWhatsApp('Platinum')">Pilih Paket</a>
                     </div>
                     
-                    <div class="card bg-white p-4 md:p-8 rounded-xl shadow-md text-center">
-                        <h3 class="text-xl md:text-2xl font-bold mb-4 mt-6">Paket Diamond</h3>
-                        <div class="text-3xl md:text-4xl font-bold text-blue-600 mb-6">Rp 300.000<span class="text-base md:text-lg font-normal">/bulan</span></div>
-                        <ul class="space-y-3 md:space-y-4 mb-8">
+                    <div class="card bg-white p-4 md:p-6 rounded-xl shadow-md text-center">
+                        <h3 class="text-lg md:text-2xl font-bold mb-4">Paket<br>Diamond</h3>
+                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-6">Rp 300.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
+                        <ul class="space-y-3 md:space-y-4 mb-8 text-sm md:text-base">
                             <li>Kecepatan 50 Mbps</li>
                             <li>Untuk kerja intensif ngebut tanpa hambatan skala bisnis dan usaha</li>
                         </ul>
@@ -441,7 +458,7 @@
 
     <!-- Contact Section -->
     <section id="contact" class="py-20">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto max-w-1200px px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 section-title mx-auto">Hubungi Kami</h2>
             <p class="text-gray-600 text-center max-w-3xl mx-auto mb-16">Untuk pemasangan atau informasi lebih lanjut, hubungi kami di:</p>
             
@@ -460,7 +477,7 @@
                         </div>
                         
                         <div class="flex items-start">
-                            <div class="w-10 h-16 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
                                 <i class="fas fa-envelope text-blue-600"></i>
                             </div>
                             <div>
@@ -489,7 +506,7 @@
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-12">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto max-w-1200px px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
                     <div class="flex items-center mb-6">
