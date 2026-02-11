@@ -9,68 +9,101 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
+       
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
-        
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent-cyan: #06b6d4;
+            --accent-purple: #7c3aed;
+            --accent-orange: #f97316;
+            --gradient-btn: linear-gradient(45deg, #2563eb, #7c3aed, #ec4899);
+            --gradient-btn-hover: linear-gradient(45deg, #ec4899, #7c3aed, #2563eb);
+            --glow-blue: rgba(37, 99, 235, 0.35);
+            --glow-cyan: rgba(6, 182, 212, 0.45);
+        }
+
+        body {
+            background: #f8fafc;
+        }
+
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
             height: 100vh;
             color: white;
         }
-        
+
         .btn-primary {
-            background: linear-gradient(45deg, #1e3a8a, #3b82f6);
+            background: var(--gradient-btn);
+            background-size: 200% 200%;
             padding: 12px 30px;
-            border-radius: 30px;
-            transition: all 0.3s ease;
+            border-radius: 9999px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.5s ease;
+            box-shadow: 0 8px 20px var(--glow-blue);
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            text-align: center;
             outline: none;
             -webkit-tap-highlight-color: transparent;
             user-select: none;
         }
-        
+
         .btn-primary:hover {
-            background: linear-gradient(45deg, #3b82f6, #1e3a8a);
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 30px var(--glow-cyan);
+            background-position: 100% 100%;
         }
-        
-        .card, .feature-card {
-            transition: transform 0.3s ease;
-            border-radius: 15px;
-            overflow: hidden;
-            width: 100%;
-            max-width: 350px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.25) 10%, transparent 40%);
+            opacity: 0;
+            transition: opacity 0.6s;
         }
-        
-        .card:hover, .feature-card:hover {
-            transform: translateY(-10px);
+
+        .btn-primary:hover::after {
+            opacity: 1;
+            animation: ripple 1.2s ease-out;
         }
-        
+
+        @keyframes ripple {
+            0% { transform: scale(0.4); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
         .section-title {
             position: relative;
             display: inline-block;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
         }
-        
+
         .section-title::after {
             content: '';
             position: absolute;
-            width: 50%;
-            height: 3px;
-            background: #3b82f6;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--primary));
             bottom: 0;
             left: 0;
+            border-radius: 2px;
         }
 
         .no-highlight {
@@ -79,191 +112,260 @@
             user-select: none;
         }
 
-        @media (max-width: 767px) {
-            .about-features {
-                display: flex;
-                flex-direction: column;
-                gap: 0.5rem;
-                width: 100%;
-                max-width: 100%;
-                margin-bottom: 1.5rem;
+        /* Pricing - kartu lebih rendah, teks disesuaikan ukuran */
+        #pricing .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        @media (min-width: 1024px) {
+            #pricing .pricing-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
-            .about-row {
-                display: flex;
-                flex-direction: row;
-                width: 100%;
-                gap: 0.5rem;
-            }
-            .about-row .feature-card {
-                flex: 1;
-                min-width: 0;
-                max-width: 100%;
-                padding: 1rem 1rem 1.5rem 1rem;
-                font-size: 0.9rem;
-                min-height: 220px;
-            }
-            .about-row .feature-card h3 {
-                font-size: 1.2rem;
-                margin-bottom: 1rem;
-            }
-            .about-row .feature-card p {
-                font-size: 0.8rem;
-                min-height: 60px;
-                flex-grow: 1;
-            }
-            .about-row .feature-card i {
+        }
+
+        #pricing .card {
+            background: white;
+            border: 1px solid rgba(37,99,235,0.1);
+            border-radius: 16px;
+            padding: 1.5rem 1.25rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        #pricing .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(37,99,235,0.15);
+            border-color: var(--accent-cyan);
+        }
+
+        #pricing .card h3 {
+            font-size: 1.25rem;              /* dikurangi 1 ukuran */
+            @media (min-width: 768px) {
                 font-size: 1.5rem;
             }
-            .pricing-grid {
-                display: flex;
-                flex-direction: column;
-                gap: 0.5rem;
-                width: 100%;
-                max-width: 100%;
-                margin-bottom: 1.5rem;
-            }
-            .pricing-row {
-                display: flex;
-                flex-direction: row;
-                width: 100%;
-                gap: 0.5rem;
-            }
-            .pricing-row .card {
-                flex: 1;
-                min-width: 0;
-                max-width: 100%;
-                padding: 1rem 1rem 1.5rem 1rem;
-                font-size: 0.9rem;
-                min-height: 280px;
-            }
-            .pricing-row .card h3 {
-                font-size: 1.2rem;
-                margin-bottom: 0.75rem;
-            }
-            .pricing-row .card .price {
-                font-size: 1.8rem;
-                margin-bottom: 1rem;
-            }
-            .pricing-row .card ul {
-                font-size: 0.8rem;
-                min-height: 80px;
-                flex-grow: 1;
-                space-y: 0.5rem;
-            }
-            .pricing-row .card a {
-                padding: 8px 15px;
-                font-size: 0.8rem;
-                margin-top: 1.5rem;
-            }
-            .pricing-row .card .badge {
-                padding: 0.5rem 0.5rem;
-                font-size: 0.75rem;
-                transform: translate-y-[-2px];
-            }
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        
-        @media (max-width: 480px) {
-            .about-row .feature-card {
-                padding: 0.8rem 0.8rem 1.2rem 0.8rem;
+
+        #pricing .price {
+            font-size: 1.75rem;
+            @media (min-width: 768px) {
+                font-size: 2rem;
+            }
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0.5rem 0 0.75rem;
+            line-height: 1.2;
+        }
+
+        #pricing .price span {
+            font-size: 0.875rem;
+            font-weight: 400;
+        }
+
+        #pricing .desc {
+            flex-grow: 1;
+            font-size: 0.875rem;
+            @media (min-width: 768px) {
+                font-size: 0.95rem;
+            }
+            color: #475569;
+            line-height: 1.45;
+            margin-bottom: 1rem;
+        }
+
+        #pricing .desc p {
+            margin: 0.25rem 0;
+        }
+
+        #pricing .badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--accent-orange);
+            color: white;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.75rem;
+            border-radius: 0 12px 0 12px;
+            box-shadow: 0 2px 8px rgba(249,115,22,0.4);
+        }
+
+        /* Bagian lain tetap sama persis */
+        #about .feature-card {
+            background: white;
+            border: 1px solid rgba(37,99,235,0.1);
+            border-radius: 16px;
+            padding: 1.5rem 1.25rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+            min-height: 220px;
+        }
+
+        #about .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(37,99,235,0.12);
+        }
+
+        #about .icon-circle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: 0 6px 15px rgba(37,99,235,0.2);
+            transition: all 0.4s ease;
+        }
+
+        #about .feature-card:hover .icon-circle {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(6,182,212,0.3);
+        }
+
+        #about .feature-card i {
+            color: white;
+            font-size: 1.6rem;
+        }
+
+        #about .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--primary-dark);
+        }
+
+        #about .feature-card p {
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        #services .service-card {
+            background: #eff6ff;
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 20px rgba(37,99,235,0.08);
+            border: 1px solid rgba(37,99,235,0.1);
+        }
+
+        #services .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(37,99,235,0.15);
+        }
+
+        #services .icon-wrapper {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 20px rgba(37,99,235,0.2);
+        }
+
+        #services .service-card:hover .icon-wrapper {
+            transform: scale(1.12);
+            box-shadow: 0 12px 30px rgba(6,182,212,0.35);
+        }
+
+        #services .service-card i {
+            color: white;
+            font-size: 2rem;
+        }
+
+        #services .service-card h3 {
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        #services .service-card p {
+            text-align: center;
+            color: #475569;
+            margin-bottom: 1.5rem;
+        }
+
+        #services .service-card ul li i {
+            color: var(--accent-cyan);
+            font-size: 1.4rem;
+            min-width: 28px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 767px) {
+            .about-features {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            #about .feature-card {
+                padding: 1.25rem 1rem;
                 min-height: 200px;
             }
-            .about-row .feature-card h3 {
-                font-size: 1rem;
-                margin-bottom: 0.75rem;
+            #pricing .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
             }
-            .about-row .feature-card p {
-                font-size: 0.7rem;
-                min-height: 60px;
-                flex-grow: 1;
-            }
-            .about-row .feature-card i {
-                font-size: 1.3rem;
-            }
-            .pricing-row .card {
-                padding: 0.8rem 0.8rem 1.2rem 0.8rem;
-                min-height: 260px;
-            }
-            .pricing-row .card h3 {
-                font-size: 1rem;
-                margin-bottom: 0.5rem;
-            }
-            .pricing-row .card .price {
-                font-size: 1.6rem;
-                margin-bottom: 0.75rem;
-            }
-            .pricing-row .card ul {
-                font-size: 0.7rem;
-                min-height: 70px;
-                space-y: 0.4rem;
-            }
-            .pricing-row .card a {
-                padding: 6px 12px;
-                font-size: 0.7rem;
-                margin-top: 1rem;
-            }
-            .pricing-row .card .badge {
-                padding: 0.5rem 0.5rem;
-                font-size: 0.7rem;
-                transform: translate-y-[-2px];
+            #pricing .card {
+                padding: 1.5rem 1rem;
+                min-height: 280px;
             }
         }
-        
+
         @media (min-width: 768px) {
             .about-features {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 1rem;
-                width: 100%;
-                max-width: 100%;
-                margin-bottom: 2rem;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.25rem;
             }
-            .about-row {
-                display: contents;
+            #about .feature-card {
+                padding: 1.75rem 1.25rem;
+                min-height: 240px;
             }
-            .about-row .feature-card h3 {
-                margin-bottom: 1rem;
+            #pricing .pricing-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.25rem;
             }
-            .about-row .feature-card p {
-                min-height: 80px;
-                flex-grow: 1;
-            }
-            .pricing-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 1rem;
-                width: 100%;
-                max-width: 100%;
-                margin-bottom: 2rem;
-            }
-            .pricing-row {
-                display: contents;
-            }
-            .pricing-row .card ul {
-                min-height: 100px;
-                flex-grow: 1;
-                space-y: 0.75rem;
-            }
-            .pricing-row .card h3 {
-                margin-bottom: 0.75rem;
-            }
-            .pricing-row .card .price {
-                margin-bottom: 1rem;
-            }
-            .pricing-row .card a {
-                margin-top: 1.5rem;
-            }
-            .pricing-row .card .badge {
-                padding: 0.5rem 0.75rem;
-                font-size: 0.75rem;
-                transform: translate-y-[-2px];
-            }
-            .feature-card, .card {
+            #pricing .card {
+                padding: 1.75rem 1.25rem;
                 min-height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+            #about .feature-card {
+                min-height: 180px;
+            }
+            #pricing .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
 </head>
 <body>
+
     <!-- Header & Navigation -->
     <header class="bg-white shadow-md fixed w-full z-50">
         <div class="container mx-auto max-w-1200px px-4 py-4 flex justify-between items-center">
@@ -271,27 +373,28 @@
                 <img src="https://github.com/pusatwifisolo/wifi/blob/main/logopwslow.png?raw=true" alt="Logo" class="w-12 h-12 mr-3">
                 <span class="text-2xl font-bold text-gray-800">Pusat WiFi <span class="text-blue-600">Solo</span></span>
             </div>
-            
+           
             <nav class="hidden md:flex space-x-10">
-                <a href="https://pusatwifisolo.github.io/wifi/#home" class="text-gray-600 hover:text-blue-600 font-medium no-highlight">Beranda</a>
-                <a href="https://pusatwifisolo.github.io/panduan/" class="text-gray-600 hover:text-blue-600 font-medium no-highlight">Panduan Layanan</a>
-                <a href="https://pusatwifisolo.github.io/pembayaran/" class="text-gray-600 hover:text-blue-600 font-medium no-highlight">Pembayaran</a>
-                <a href="https://pusatwifisolo.github.io/galeri/" class="text-gray-600 hover:text-blue-600 font-medium no-highlight">Galeri</a>
+                <a href="#home" class="text-gray-600 hover:text-blue-600 font-medium no-highlight">Beranda</a>
+                <a href="#about" class="text-gray-600 hover:text-blue-600 font-medium no-highlight">Tentang Kami</a>
+                <a href="#services" class="text-gray-600 hover:text-blue-600 font-medium no-highlight">Layanan</a>
+                <a href="#pricing" class="text-gray-600 hover:text-blue-600 font-medium no-highlight">Paket</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-600 font-medium no-highlight">Hubungi Kami</a>
             </nav>
-            
+           
             <div class="md:hidden">
                 <button id="menu-toggle" class="text-gray-600 no-highlight">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
         </div>
-        
-        <!-- Mobile Menu -->
+       
         <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-4">
-            <a href="https://pusatwifisolo.github.io/wifi/#home" class="block py-2 text-gray-600 hover:text-blue-600 no-highlight">Beranda</a>
-            <a href="https://pusatwifisolo.github.io/panduan/" class="block py-2 text-gray-600 hover:text-blue-600 no-highlight">Panduan Layanan</a>
-            <a href="https://pusatwifisolo.github.io/pembayaran/" class="block py-2 text-gray-600 hover:text-blue-600 no-highlight">Pembayaran</a>
-            <a href="https://pusatwifisolo.github.io/galeri/" class="block py-2 text-gray-600 hover:text-blue-600 no-highlight">Galeri</a>
+            <a href="#home" class="block py-2 text-gray-600 hover:text-blue-600 no-highlight">Beranda</a>
+            <a href="#about" class="block py-2 text-gray-600 hover:text-blue-600 no-highlight">Tentang Kami</a>
+            <a href="#services" class="block py-2 text-gray-600 hover:text-blue-600 no-highlight">Layanan</a>
+            <a href="#pricing" class="block py-2 text-gray-600 hover:text-blue-600 no-highlight">Paket</a>
+            <a href="#contact" class="block py-2 text-gray-600 hover:text-blue-600 no-highlight">Hubungi Kami</a>
         </div>
     </header>
 
@@ -299,10 +402,10 @@
     <section id="home" class="hero flex items-center pt-24">
         <div class="container mx-auto max-w-1200px px-4 text-center">
             <h1 class="text-4xl md:text-6xl font-bold mb-6">Pasang WiFi?<br>Ya di Pusat WiFi Solo</h1>
-            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">Internet Cepat, Murah, dan Gratis Biaya Perbaikan<br>mulai dari Rp 100.000/Bulan</p>
+            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">Internet Cepat, Murah, dan Gratis Biaya Perbaikan<br>mulai dari Rp 50.000/Bulan</p>
             <div class="flex flex-col md:flex-row justify-center gap-4">
-                <a href="#contact" class="btn-primary text-white font-medium inline-block no-highlight">Hubungi Kami</a>
-                <a href="#pricing" class="bg-white text-blue-600 font-medium py-3 px-6 rounded-full border-2 border-blue-600 inline-block no-highlight">Lihat Paket</a>
+                <a href="#contact" class="btn-primary inline-block no-highlight">Hubungi Kami</a>
+                <a href="#pricing" class="btn-primary inline-block no-highlight">Lihat Paket</a>
             </div>
         </div>
     </section>
@@ -310,90 +413,100 @@
     <!-- About Section -->
     <section id="about" class="py-20 bg-gray-50">
         <div class="container mx-auto max-w-1200px px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 section-title mx-auto">Tentang Layanan Kami</h2>
-            <p class="text-gray-600 text-center max-w-3xl mx-auto mb-16">Kami menyediakan solusi internet terbaik dengan teknologi terkini untuk memenuhi kebutuhan digital Anda.</p>
-            
-            <div class="about-features">
-                <div class="about-row">
-                    <div class="feature-card bg-white p-4 md:p-6 rounded-xl shadow-md text-center card">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
-                            <i class="fas fa-rocket text-blue-600 text-lg md:text-2xl"></i>
-                        </div>
-                        <h3 class="text-lg md:text-xl font-bold mb-4">Kecepatan</h3>
-                        <p class="text-gray-600 text-sm md:text-base">Nikmati internet super cepat hingga 50 Mbps untuk streaming, gaming, dan bekerja tanpa lag dengan jaringan stabil kami.</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 section-title mx-auto">Tentang Layanan Kami</h2>
+            <p class="text-gray-600 text-center max-w-3xl mx-auto mb-12">Kami menyediakan internet cepat, stabil, dan terjangkau dengan layanan terbaik di Solo dan sekitarnya.</p>
+
+            <div class="about-features grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="feature-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-rocket"></i>
                     </div>
-                    
-                    <div class="feature-card bg-white p-4 md:p-6 rounded-xl shadow-md text-center card">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
-                            <i class="fas fa-dollar-sign text-blue-600 text-lg md:text-2xl"></i>
-                        </div>
-                        <h3 class="text-lg md:text-xl font-bold mb-4">Harga Terjangkau</h3>
-                        <p class="text-gray-600 text-sm md:text-base">Paket hemat mulai Rp 100.000/bulan dengan kualitas premium, cocok untuk semua kalangan tanpa menguras dompet.</p>
-                    </div>
+                    <h3>Kecepatan Tinggi</h3>
+                    <p>Internet super cepat hingga 55 Mbps, cocok untuk streaming, gaming, dan kerja online tanpa lag.</p>
                 </div>
-                
-                <div class="about-row">
-                    <div class="feature-card bg-white p-4 md:p-6 rounded-xl shadow-md text-center card">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
-                            <i class="fas fa-tools text-blue-600 text-lg md:text-2xl"></i>
-                        </div>
-                        <h3 class="text-lg md:text-xl font-bold mb-4">Perbaikan Gratis</h3>
-                        <p class="text-gray-600 text-sm md:text-base">Layanan perbaikan cepat 24/7 tanpa biaya tambahan, memastikan koneksi Anda selalu optimal dan bebas gangguan.</p>
+
+                <div class="feature-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-dollar-sign"></i>
                     </div>
-                    
-                    <div class="feature-card bg-white p-4 md:p-6 rounded-xl shadow-md text-center card">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
-                            <i class="fas fa-headset text-blue-600 text-lg md:text-2xl"></i>
-                        </div>
-                        <h3 class="text-lg md:text-xl font-bold mb-4">Dukungan 24/7</h3>
-                        <p class="text-gray-600 text-sm md:text-base">Tim teknis kami siap membantu Anda kapan saja, setiap hari. Tidak ada lagi gangguan yang berlarut-larut.</p>
+                    <h3>Harga Terjangkau</h3>
+                    <p>Paket mulai Rp 50.000/bulan, kualitas premium tanpa biaya tersembunyi.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-tools"></i>
                     </div>
+                    <h3>Perbaikan Gratis</h3>
+                    <p>Gangguan ditangani cepat 24/7 tanpa biaya tambahan sama sekali.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Dukungan 24/7</h3>
+                    <p>Tim siap membantu kapan saja via WhatsApp atau telepon, ramah & profesional.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-20">
+    <section id="services" class="py-20 bg-white">
         <div class="container mx-auto max-w-1200px px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 section-title mx-auto">Layanan Kami</h2>
-            <p class="text-gray-600 text-center max-w-3xl mx-auto mb-16">Berbagai pilihan layanan internet untuk memenuhi kebutuhan rumah tangga dan bisnis.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-blue-50 p-8 rounded-xl">
-                    <h3 class="text-2xl font-bold mb-4 text-blue-800">WiFi Rumahan</h3>
-                    <p class="text-gray-700 mb-6">Solusi internet untuk kebutuhan keluarga dengan jangkauan yang luas di seluruh area rumah.</p>
-                    <ul class="space-y-3">
+            <p class="text-gray-600 text-center max-w-3xl mx-auto mb-16">Solusi internet berkualitas tinggi untuk kebutuhan rumah tangga maupun bisnis Anda.</p>
+           
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                <div class="service-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6">WiFi Rumahan</h3>
+                    <p class="text-gray-700 mb-8 text-center">Solusi internet stabil dan cepat untuk seluruh keluarga di rumah.</p>
+                    <ul class="space-y-4">
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                            <i class="fas fa-check-circle mt-1 mr-3"></i>
                             <span>Kecepatan hingga 55 Mbps</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
-                            <span>Jangkauan untuk 20+ perangkat</span>
+                            <i class="fas fa-check-circle mt-1 mr-3"></i>
+                            <span>Jangkauan luas untuk 20+ perangkat</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
-                            <span>Internet cepat dan stabil</span>
+                            <i class="fas fa-check-circle mt-1 mr-3"></i>
+                            <span>Koneksi stabil tanpa buffering</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle mt-1 mr-3"></i>
+                            <span>Instalasi cepat & perbaikan gratis</span>
                         </li>
                     </ul>
                 </div>
-                
-                <div class="bg-blue-50 p-8 rounded-xl">
-                    <h3 class="text-2xl font-bold mb-4 text-blue-800">WiFi Voucher</h3>
-                    <p class="text-gray-700 mb-6">Layanan internet berbasis voucher untuk akses fleksibel, ideal untuk kafe, hotel, dan event.</p>
-                    <ul class="space-y-3">
+               
+                <div class="service-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6">WiFi Voucher</h3>
+                    <p class="text-gray-700 mb-8 text-center">Sistem voucher fleksibel cocok untuk kafe, hotel, penginapan, atau event.</p>
+                    <ul class="space-y-4">
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
-                            <span>Akses internet fleksibel dengan voucher</span>
+                            <i class="fas fa-check-circle mt-1 mr-3"></i>
+                            <span>Akses internet berbasis voucher waktu</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
-                            <span>Kontrol pengguna dan batas waktu</span>
+                            <i class="fas fa-check-circle mt-1 mr-3"></i>
+                            <span>Kontrol penuh pengguna & batas waktu</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
-                            <span>Ideal untuk kafe, hotel, dan event</span>
+                            <i class="fas fa-check-circle mt-1 mr-3"></i>
+                            <span>Login page custom dengan logo bisnis Anda</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle mt-1 mr-3"></i>
+                            <span>Ideal untuk kafe, hotel, warnet, event</span>
                         </li>
                     </ul>
                 </div>
@@ -401,56 +514,132 @@
         </div>
     </section>
 
-    <!-- Pricing Section -->
+    <!-- Pricing Section - dengan penyesuaian ukuran teks & pecah harga di mobile -->
     <section id="pricing" class="py-20 bg-gray-50">
-        <div class="container mx-auto max-w-1200px px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 section-title mx-auto">Paket Harga</h2>
-            <p class="text-gray-600 text-center max-w-3xl mx-auto mb-16">Pilih paket yang sesuai dengan kebutuhan dan budget Anda. Semua paket unlimited tanpa batasan kuota.</p>
-            
+        <div class="container mx-auto max-w-7xl px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 section-title mx-auto">Paket Harga</h2>
+            <p class="text-gray-600 text-center max-w-4xl mx-auto mb-16">Pilih paket sesuai kebutuhan dan budget Anda. Semua paket unlimited tanpa batasan kuota, plus perbaikan gratis & dukungan 24/7.</p>
+           
             <div class="pricing-grid">
-                <div class="pricing-row">
-                    <div class="card bg-white p-4 md:p-6 rounded-xl shadow-md text-center">
-                        <h3 class="text-lg md:text-2xl font-bold mb-3 md:mb-3">Paket<br>Basic</h3>
-                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-4 md:mb-4">Rp 100.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
-                        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-6 text-sm md:text-base">
-                            <li>Kecepatan 10 Mbps</li>
-                            <li>Ideal untuk browsing dan YouTube</li>
-                        </ul>
-                        <a href="#" class="btn-primary text-white font-medium inline-block no-highlight" onclick="redirectToWhatsApp('Basic')">Pilih Paket</a>
+                <!-- Super Hemat -->
+                <div class="card">
+                    <h3>Super Hemat</h3>
+                    <div class="price">
+                        Rp 50.000
+                        <span class="text-base font-normal md:inline"><br class="md:hidden">/bulan</span>
                     </div>
-                    
-                    <div class="card bg-white p-4 md:p-6 rounded-xl shadow-md text-center border-2 border-blue-600 relative">
-                        <div class="absolute top-0 right-0 bg-blue-600 text-white px-2 md:px-3 py-0.5 text-xs font-medium rounded-bl-lg badge">Best</div>
-                        <h3 class="text-lg md:text-2xl font-bold mb-3 md:mb-3">Paket<br>Premium</h3>
-                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-4 md:mb-4">Rp 150.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
-                        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-6 text-sm md:text-base">
-                            <li>Kecepatan 25 Mbps</li>
-                            <li>Cocok untuk keluarga dan usaha warung makan</li>
-                        </ul>
-                        <a href="#" class="btn-primary text-white font-medium inline-block no-highlight" onclick="redirectToWhatsApp('Premium')">Pilih Paket</a>
+                    <div class="desc">
+                        <p>Kecepatan 3 Mbps stabil</p>
+                        <p>YouTube 480p & browsing ringan</p>
+                        <p>Cocok pengguna tunggal hemat</p>
                     </div>
+                    <a href="#" class="btn-primary mt-4" onclick="redirectToWhatsApp('Super Hemat')">Pilih Paket</a>
                 </div>
-                
-                <div class="pricing-row">
-                    <div class="card bg-white p-4 md:p-6 rounded-xl shadow-md text-center">
-                        <h3 class="text-lg md:text-2xl font-bold mb-3 md:mb-3">Paket<br>Platinum</h3>
-                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-4 md:mb-4">Rp 200.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
-                        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-6 text-sm md:text-base">
-                            <li>Kecepatan 35 Mbps</li>
-                            <li>Untuk streaming HD dan belajar online</li>
-                        </ul>
-                        <a href="#" class="btn-primary text-white font-medium inline-block no-highlight" onclick="redirectToWhatsApp('Platinum')">Pilih Paket</a>
+
+                <!-- Paket Hemat -->
+                <div class="card">
+                    <h3>Paket Hemat</h3>
+                    <div class="price">
+                        Rp 75.000
+                        <span class="text-base font-normal md:inline"><br class="md:hidden">/bulan</span>
                     </div>
-                    
-                    <div class="card bg-white p-4 md:p-6 rounded-xl shadow-md text-center">
-                        <h3 class="text-lg md:text-2xl font-bold mb-3 md:mb-3">Paket<br>Diamond</h3>
-                        <div class="price text-3xl md:text-4xl font-bold text-blue-600 mb-4 md:mb-4">Rp 250.000<br><span class="text-base md:text-lg font-normal">/bulan</span></div>
-                        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-6 text-sm md:text-base">
-                            <li>Kecepatan 55 Mbps</li>
-                            <li>Untuk kerja intensif ngebut tanpa hambatan skala bisnis dan usaha</li>
-                        </ul>
-                        <a href="#" class="btn-primary text-white font-medium inline-block no-highlight" onclick="redirectToWhatsApp('Diamond')">Pilih Paket</a>
+                    <div class="desc">
+                        <p>Kecepatan 5 Mbps nyaman</p>
+                        <p>Support 3–5 device sekaligus</p>
+                        <p>YouTube 720p & WFH ringan</p>
                     </div>
+                    <a href="#" class="btn-primary mt-4" onclick="redirectToWhatsApp('Paket Hemat')">Pilih Paket</a>
+                </div>
+
+                <!-- Basic -->
+                <div class="card">
+                    <h3>Paket Basic</h3>
+                    <div class="price">
+                        Rp 100.000
+                        <span class="text-base font-normal md:inline"><br class="md:hidden">/bulan</span>
+                    </div>
+                    <div class="desc">
+                        <p>Kecepatan 10 Mbps</p>
+                        <p>Streaming & browsing nyaman</p>
+                        <p>Ideal keluarga kecil & WFH</p>
+                    </div>
+                    <a href="#" class="btn-primary mt-4" onclick="redirectToWhatsApp('Basic')">Pilih Paket</a>
+                </div>
+
+                <!-- Premium -->
+                <div class="card relative border-2 border-blue-600">
+                    <div class="badge">Best</div>
+                    <h3>Paket Premium</h3>
+                    <div class="price">
+                        Rp 150.000
+                        <span class="text-base font-normal md:inline"><br class="md:hidden">/bulan</span>
+                    </div>
+                    <div class="desc">
+                        <p>Kecepatan 25 Mbps</p>
+                        <p>Streaming HD & keluarga besar</p>
+                        <p>Cocok warung makan kecil</p>
+                    </div>
+                    <a href="#" class="btn-primary mt-4" onclick="redirectToWhatsApp('Premium')">Pilih Paket</a>
+                </div>
+
+                <!-- Platinum -->
+                <div class="card">
+                    <h3>Paket Platinum</h3>
+                    <div class="price">
+                        Rp 200.000
+                        <span class="text-base font-normal md:inline"><br class="md:hidden">/bulan</span>
+                    </div>
+                    <div class="desc">
+                        <p>Kecepatan 35 Mbps</p>
+                        <p>Streaming 4K & gaming lancar</p>
+                        <p>Untuk rumah tangga sedang</p>
+                    </div>
+                    <a href="#" class="btn-primary mt-4" onclick="redirectToWhatsApp('Platinum')">Pilih Paket</a>
+                </div>
+
+                <!-- Diamond -->
+                <div class="card">
+                    <h3>Paket Diamond</h3>
+                    <div class="price">
+                        Rp 225.000
+                        <span class="text-base font-normal md:inline"><br class="md:hidden">/bulan</span>
+                    </div>
+                    <div class="desc">
+                        <p>Kecepatan 45 Mbps</p>
+                        <p>Upload cepat & live streaming</p>
+                        <p>Ideal bisnis kecil & WFH berat</p>
+                    </div>
+                    <a href="#" class="btn-primary mt-4" onclick="redirectToWhatsApp('Diamond')">Pilih Paket</a>
+                </div>
+
+                <!-- Paket Star (ex Super Diamond) -->
+                <div class="card">
+                    <h3>Paket Star</h3>
+                    <div class="price">
+                        Rp 250.000
+                        <span class="text-base font-normal md:inline"><br class="md:hidden">/bulan</span>
+                    </div>
+                    <div class="desc">
+                        <p>Kecepatan 60 Mbps</p>
+                        <p>Rumah besar, kost & cafe kecil</p>
+                        <p>Banyak device tetap stabil</p>
+                    </div>
+                    <a href="#" class="btn-primary mt-4" onclick="redirectToWhatsApp('Paket Star')">Pilih Paket</a>
+                </div>
+
+                <!-- Paket Sultan -->
+                <div class="card">
+                    <h3>Paket Sultan</h3>
+                    <div class="price">
+                        Rp 300.000
+                        <span class="text-base font-normal md:inline"><br class="md:hidden">/bulan</span>
+                    </div>
+                    <div class="desc">
+                        <p>Kecepatan 75 Mbps</p>
+                        <p>Terbaik untuk cafe, rumah makan, kost</p>
+                        <p>Koneksi super stabil bisnis</p>
+                    </div>
+                    <a href="#" class="btn-primary mt-4" onclick="redirectToWhatsApp('Paket Sultan')">Pilih Paket</a>
                 </div>
             </div>
         </div>
@@ -461,7 +650,7 @@
         <div class="container mx-auto max-w-1200px px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 section-title mx-auto">Hubungi Kami</h2>
             <p class="text-gray-600 text-center max-w-3xl mx-auto mb-16">Untuk pemasangan atau informasi lebih lanjut, hubungi kami di:</p>
-            
+           
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div>
                     <h3 class="text-2xl font-bold mb-6">Informasi Kontak</h3>
@@ -475,7 +664,7 @@
                                 <p class="text-gray-600"><a href="#" class="no-highlight" onclick="redirectToContactWhatsApp()">0857 7777 3541</a></p>
                             </div>
                         </div>
-                        
+                       
                         <div class="flex items-start">
                             <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
                                 <i class="fas fa-envelope text-blue-600"></i>
@@ -487,12 +676,12 @@
                         </div>
                     </div>
                 </div>
-                
+               
                 <div>
                     <h3 class="text-2xl font-bold mb-6">Kirim Pesan</h3>
                     <div class="space-y-6">
                         <p class="text-gray-600">Klik tombol di bawah untuk menghubungi kami melalui WhatsApp:</p>
-                        <a href="#" class="btn-primary text-white font-medium inline-block no-highlight" onclick="redirectToContactWhatsApp()">Kirim Pesan via WhatsApp</a>
+                        <a href="#" class="btn-primary" onclick="redirectToContactWhatsApp()">Kirim Pesan via WhatsApp</a>
                     </div>
                 </div>
             </div>
@@ -510,21 +699,22 @@
                     </div>
                     <p class="text-gray-400">Internet Lancar dan Stabil untuk rumah dan bisnis.</p>
                 </div>
-                
+               
                 <div>
                     <h3 class="text-lg font-bold mb-6">Halaman</h3>
                     <ul class="space-y-3">
-                        <li><a href="https://pusatwifisolo.github.io/wifi/#home" class="text-gray-400 hover:text-white no-highlight">Beranda</a></li>
-                        <li><a href="https://pusatwifisolo.github.io/panduan/" class="text-gray-400 hover:text-white no-highlight">Panduan Layanan</a></li>
-                        <li><a href="https://pusatwifisolo.github.io/pembayaran/" class="text-gray-400 hover:text-white no-highlight">Pembayaran</a></li>
-                        <li><a href="https://pusatwifisolo.github.io/galeri/" class="text-gray-400 hover:text-white no-highlight">Galeri</a></li>
+                        <li><a href="#home" class="text-gray-400 hover:text-white no-highlight">Beranda</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white no-highlight">Tentang Kami</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white no-highlight">Layanan</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-white no-highlight">Paket</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white no-highlight">Hubungi Kami</a></li>
                     </ul>
                 </div>
-                
+               
                 <div>
                     <h3 class="text-lg font-bold mb-6">Tetap Terhubung</h3>
                     <div class="flex space-x-4 mb-6">
-                        <a href="javascript:void(0)" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 no-highlight" onclick="redirectToContactWhatsApp('general')">
+                        <a href="javascript:void(0)" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 no-highlight" onclick="redirectToContactWhatsApp()">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                         <a href="mailto:halopusatwifisolo@gmail.com?subject=Informasi%20Pasang%20WiFi%20Solo" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 no-highlight">
@@ -533,7 +723,7 @@
                     </div>
                 </div>
             </div>
-            
+           
             <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-400">
                 <p>&copy; 2025 Pusat WiFi Solo. All rights reserved.</p>
             </div>
@@ -546,69 +736,50 @@
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         });
-        
-        // Close menu when clicking outside
+       
         document.addEventListener('click', function(event) {
             const menu = document.getElementById('mobile-menu');
             const toggle = document.getElementById('menu-toggle');
-            
             if (!menu.contains(event.target) && !toggle.contains(event.target) && !menu.classList.contains('hidden')) {
                 menu.classList.add('hidden');
             }
         });
-        
-        // Smooth scrolling for anchor links
+       
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    const mobileMenu = document.getElementById('mobile-menu');
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                    }
+                const target = document.querySelector(targetId);
+                if (target) {
+                    window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+                    document.getElementById('mobile-menu')?.classList.add('hidden');
                 }
             });
         });
 
-        // Redirect to WhatsApp with selected package
         function redirectToWhatsApp(packageName) {
             const packages = {
-                Basic: { speed: "10 Mbps", price: "Rp 100.000/Bulan" },
-                Premium: { speed: "25 Mbps", price: "Rp 150.000/Bulan" },
-                Platinum: { speed: "35 Mbps", price: "Rp 200.000/Bulan" },
-                Diamond: { speed: "55 Mbps", price: "Rp 250.000/Bulan" }
+                "Super Hemat": { speed: "3 Mbps", price: "Rp 50.000/Bulan" },
+                "Paket Hemat": { speed: "5 Mbps", price: "Rp 75.000/Bulan" },
+                "Paket Basic": { speed: "10 Mbps", price: "Rp 100.000/Bulan" },
+                "Paket Premium": { speed: "25 Mbps", price: "Rp 150.000/Bulan" },
+                "Paket Platinum": { speed: "35 Mbps", price: "Rp 200.000/Bulan" },
+                "Paket Diamond": { speed: "45 Mbps", price: "Rp 225.000/Bulan" },
+                "Paket Star": { speed: "60 Mbps", price: "Rp 250.000/Bulan" },
+                "Paket Sultan": { speed: "75 Mbps", price: "Rp 300.000/Bulan" }
             };
-
-            const message = encodeURIComponent(`Saya ingin mendaftar untuk Paket ${packageName}\nKecepatan: ${packages[packageName].speed}\nHarga: ${packages[packageName].price}`);
-
-            const whatsappUrl = `https://wa.me/6285777773541?text=${message}`;
-            setTimeout(() => {
-                window.open(whatsappUrl, '_blank');
-            }, 300);
+            const message = encodeURIComponent(`Saya ingin mendaftar untuk ${packageName}\nKecepatan: ${packages[packageName].speed}\nHarga: ${packages[packageName].price}`);
+            window.open(`https://wa.me/6285777773541?text=${message}`, '_blank');
         }
 
-        // Redirect to WhatsApp for contact section
         function redirectToContactWhatsApp() {
             const message = encodeURIComponent(`Saya ingin informasi lebih lanjut tentang Pasang WiFi di Pusat WiFi Solo`);
-            const whatsappUrl = `https://wa.me/6285777773541?text=${message}`;
-            setTimeout(() => {
-                window.open(whatsappUrl, '_blank');
-            }, 300);
+            window.open(`https://wa.me/6285777773541?text=${message}`, '_blank');
         }
 
-        // Card animation on scroll
-        const cards = document.querySelectorAll('.card, .feature-card');
+        const cards = document.querySelectorAll('.card, .feature-card, .service-card');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
