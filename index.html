@@ -45,10 +45,11 @@
         .btn-primary {
             background: var(--gradient-btn);
             background-size: 200% 200%;
-            padding: 12px 30px;
+            padding: 10px 24px;                    /* dikurangi ukuran tombol */
             border-radius: 9999px;
             color: white;
             font-weight: 600;
+            font-size: 0.95rem;                    /* font lebih kecil 2 tingkat */
             text-decoration: none;
             transition: all 0.5s ease;
             box-shadow: 0 8px 20px var(--glow-blue);
@@ -112,7 +113,72 @@
             user-select: none;
         }
 
-        /* Pricing - kartu lebih rendah, teks disesuaikan ukuran */
+        /* About - 4 kartu desktop, 2 kartu mobile */
+        #about .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        @media (min-width: 1024px) {
+            #about .about-features {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        #about .feature-card {
+            background: white;
+            border: 1px solid rgba(37,99,235,0.1);
+            border-radius: 16px;
+            padding: 1.5rem 1.25rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+            min-height: 220px;
+        }
+
+        #about .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(37,99,235,0.12);
+        }
+
+        #about .icon-circle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: 0 6px 15px rgba(37,99,235,0.2);
+            transition: all 0.4s ease;
+        }
+
+        #about .feature-card:hover .icon-circle {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(6,182,212,0.3);
+        }
+
+        #about .feature-card i {
+            color: white;
+            font-size: 1.6rem;
+        }
+
+        #about .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--primary-dark);
+        }
+
+        #about .feature-card p {
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        /* Pricing - kartu lebih rendah, teks disesuaikan */
         #pricing .pricing-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -147,7 +213,7 @@
         }
 
         #pricing .card h3 {
-            font-size: 1.25rem;              /* dikurangi 1 ukuran */
+            font-size: 1.25rem;
             @media (min-width: 768px) {
                 font-size: 1.5rem;
             }
@@ -203,59 +269,7 @@
             box-shadow: 0 2px 8px rgba(249,115,22,0.4);
         }
 
-        /* Bagian lain tetap sama persis */
-        #about .feature-card {
-            background: white;
-            border: 1px solid rgba(37,99,235,0.1);
-            border-radius: 16px;
-            padding: 1.5rem 1.25rem;
-            text-align: center;
-            transition: all 0.4s ease;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
-            min-height: 220px;
-        }
-
-        #about .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(37,99,235,0.12);
-        }
-
-        #about .icon-circle {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            box-shadow: 0 6px 15px rgba(37,99,235,0.2);
-            transition: all 0.4s ease;
-        }
-
-        #about .feature-card:hover .icon-circle {
-            transform: scale(1.1);
-            box-shadow: 0 10px 25px rgba(6,182,212,0.3);
-        }
-
-        #about .feature-card i {
-            color: white;
-            font-size: 1.6rem;
-        }
-
-        #about .feature-card h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            color: var(--primary-dark);
-        }
-
-        #about .feature-card p {
-            font-size: 0.9rem;
-            color: #475569;
-            line-height: 1.5;
-        }
-
+        /* Services tetap sama */
         #services .service-card {
             background: #eff6ff;
             border-radius: 16px;
@@ -405,7 +419,7 @@
             <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">Internet Cepat, Murah, dan Gratis Biaya Perbaikan<br>mulai dari Rp 50.000/Bulan</p>
             <div class="flex flex-col md:flex-row justify-center gap-4">
                 <a href="#contact" class="btn-primary inline-block no-highlight">Hubungi Kami</a>
-                <a href="#pricing" class="btn-primary inline-block no-highlight">Lihat Paket</a>
+                <a href="#pricing" class="btn-primary inline-block no-highlight">Daftar Harga</a>
             </div>
         </div>
     </section>
@@ -514,7 +528,7 @@
         </div>
     </section>
 
-    <!-- Pricing Section - dengan penyesuaian ukuran teks & pecah harga di mobile -->
+    <!-- Pricing Section -->
     <section id="pricing" class="py-20 bg-gray-50">
         <div class="container mx-auto max-w-7xl px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 section-title mx-auto">Paket Harga</h2>
@@ -612,7 +626,7 @@
                     <a href="#" class="btn-primary mt-4" onclick="redirectToWhatsApp('Diamond')">Pilih Paket</a>
                 </div>
 
-                <!-- Paket Star (ex Super Diamond) -->
+                <!-- Paket Star -->
                 <div class="card">
                     <h3>Paket Star</h3>
                     <div class="price">
